@@ -121,7 +121,7 @@ require_once("verificar.php");
                                 <li class="dropdown profile_details_drop">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         <div class="profile_img">   
-                                            <span class="prfil-img"><img src="images/2.jpg" alt=""> </span> 
+                                            <span class="prfil-img"><img src="" alt=""> </span> 
                                             <div class="user-name">
                                                 <p><?php echo $nome_usuario ?></p>
                                                 <span><?php echo $nivel_usuario ?></span>
@@ -134,7 +134,7 @@ require_once("verificar.php");
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Configurações</a> </li> 
                                         <li> <a href="#"><i class="fa fa-user"></i> Minha conta</a> </li>                                        
-                                        <li> <a href="#"><i class="fa fa-sign-out"></i> Sair</a> </li>
+                                        <li> <a href="../index.php"><i class="fa fa-sign-out"></i> Sair</a> </li>
                                     </ul>
                                 </li>
                             </ul>
