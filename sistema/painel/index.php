@@ -13,12 +13,18 @@
         $cfp_usuario = $res[0]['cpf'];
         $nivel_usuario = $res[0]['nivel'];
     }
-        
-    ?> 
-        
-        
 
+    if(@$_GET['pag']==''){
 
+      $pag = 'home';  
+    }
+    else {
+
+        $pag = $_GET['pag'];
+
+    }       
+           
+    ?>     
         <!DOCTYPE HTML>
         <html>
         <head>
@@ -139,7 +145,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                         <li><a href="cadastro_usuario.php"><i class="fa fa-angle-right"></i> Cadastrar</a></li>  
+                         <li><a href="index.php?pag=cadastro_usuario"><i class="fa fa-angle-right"></i> Cadastrar</a></li>  
                         </ul>
                       </li>            
                       
@@ -149,13 +155,13 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                          <li><a href="forms.html"><i class="fa fa-angle-right"></i>Cíveis</a></li>
-                          <li><a href="validation.html"><i class="fa fa-angle-right"></i>Sucessões</a></li>
-                          <li><a href="validation.html"><i class="fa fa-angle-right"></i>Familia</a></li>
-                          <li><a href="validation.html"><i class="fa fa-angle-right"></i>Fazenda</a></li>
-                          <li><a href="validation.html"><i class="fa fa-angle-right"></i>Criminais</a></li>
-                          <li><a href="validation.html"><i class="fa fa-angle-right"></i>Custas</a></li>
-                          <li><a href="adiciona_calculos.php"><i class="fa fa-angle-right"></i>Adicionar</a></li>
+                          <li><a href="index.php?pag=calculos_civeis"><i class="fa fa-angle-right"></i>Cíveis</a></li>
+                          <li><a href="index.php?pag=calculos_sucessoes"><i class="fa fa-angle-right"></i>Sucessões</a></li>
+                          <li><a href="index.php?pag=calculos_familia"><i class="fa fa-angle-right"></i>Familia</a></li>
+                          <li><a href="index.php?pag=calculos_fazenda"><i class="fa fa-angle-right"></i>Fazenda</a></li>
+                          <li><a href="index.php?pag=calculos_criminais"><i class="fa fa-angle-right"></i>Criminais</a></li>
+                          <li><a href="index.php?pag=calculos_custas"><i class="fa fa-angle-right"></i>Custas</a></li>
+                          <li><a href="index.php?pag=adiciona_calculos"><i class="fa fa-angle-right"></i>Adicionar</a></li>
                         </ul>
                       </li>
 
@@ -165,8 +171,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                          <li><a href="relatorio_servidores.php"><i class="fa fa-angle-right"></i>Servidores</a></li>                          
-                          <li><a href="relatorio_calculos.php"><i class="fa fa-angle-right"></i>Cálculos</a></li>
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i>Servidores</a></li>                          
+                          <li><a href="index.php?pag=relatorio_calculos"><i class="fa fa-angle-right"></i>Cálculos</a></li>
                         </ul>
                       </li>
 
@@ -176,7 +182,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>                    
                         <ul class="treeview-menu">
-                          <li><a href="pesquisar.php"><i class="fa fa-angle-right"></i> Processos</a></li>                                       
+                          <li><a href="index.php?pag=pesquisa_processos"><i class="fa fa-angle-right"></i> Processos</a></li>                                       
                         </ul>
                       </li>
 
@@ -186,11 +192,11 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>                    
                         <ul class="treeview-menu">
-                          <li><a href="login.html"><i class="fa fa-angle-right"></i> Atos </a></li>
-                          <li><a href="login.html"><i class="fa fa-angle-right"></i> Instruções </a></li>
-                          <li><a href="login.html"><i class="fa fa-angle-right"></i> Manuais </a></li>
-                          <li><a href="login.html"><i class="fa fa-angle-right"></i> Certidões </a></li>
-                          <li><a href="login.html"><i class="fa fa-angle-right"></i> Planilhas </a></li>                                                                 
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Atos </a></li>
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Instruções </a></li>
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Manuais </a></li>
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Certidões </a></li>
+                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Planilhas </a></li>                                                                 
                         </ul>
                       </li>
 
@@ -200,7 +206,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>                    
                         <ul class="treeview-menu">
-                          <li><a href="adiciona_arquivos.php"><i class="fa fa-angle-right"></i> Arquivos </a></li>                                                                                                               
+                          <li><a href="index.php?pag=adiciona_arquivos"><i class="fa fa-angle-right"></i> Arquivos </a></li>                                                                                                               
                         </ul>
                       </li>
 
@@ -261,7 +267,7 @@
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Configurações</a> </li> 
                                         <li> <a href="#"><i class="fa fa-user"></i> Minha conta</a> </li>                                        
-                                        <li> <a href="../index.php"><i class="fa fa-sign-out"></i> Sair</a> </li>
+                                        <li> <a href="logout.php"><i class="fa fa-sign-out"></i> Sair</a> </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -279,7 +285,7 @@
                 <div id="page-wrapper">
                     
                     <?php
-                        require_once("paginas/home.php");
+                        require_once("paginas/".$pag.'.php');
                      ?>
 
                 </div>
