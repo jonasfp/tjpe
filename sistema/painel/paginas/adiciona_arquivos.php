@@ -1,3 +1,12 @@
+<?php 
+
+@session_start();
+require_once('verificar.php');
+require_once('../conexao.php');
+
+ ?>
+
+
 <h3 class="title1">Adicionar arquivos :</h3>
 
 <div class="form-three widget-shadow">

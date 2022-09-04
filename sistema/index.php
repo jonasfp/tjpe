@@ -9,8 +9,12 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
 if ($total_reg == 0) {
-    $pdo->query("INSERT INTO usuarios SET nome = 'Jonas Ferreira da Paixão', email = '$email_sistema', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', data = curDate(), ativo = 'Sim'");
-}
+    $pdo->query("INSERT INTO usuarios SET nome = 'Jonas Ferreira da Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', data = curDate(), ativo = 'Sim'");
+     $pdo->query("INSERT INTO usuarios SET nome = 'Edna Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
+      $pdo->query("INSERT INTO usuarios SET nome = 'Eli Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
+       $pdo->query("INSERT INTO usuarios SET nome = 'Rosa Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
+        $pdo->query("INSERT INTO usuarios SET nome = 'Paulo Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
+    }
 
 ?>
 
@@ -97,7 +101,7 @@ if ($total_reg == 0) {
 			</div>
 
 			<form method="post" id = "form-recuperar">
-				<div class="modal-body">
+				<div class="modal-body"> 	
 					<input placeholder="Digite o email cadastrado para recuperar a senha" class="form-control" type="email" name="email" required="required" id="email-recuperar">
 				<div id="mensagem-recuperar"></div>
 				</div>

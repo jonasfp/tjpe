@@ -1,4 +1,5 @@
     <?php
+    @session_start();
     require_once("verificar.php");
     require_once("../conexao.php");
     $id_usuario = $_SESSION['id'];
@@ -10,7 +11,9 @@
     if ($total_reg > 0) {
         $nome_usuario = $res[0]['nome'];
         $email_usuario = $res[0]['email'];
+        $matricula_usuario = $res[0]['matricula'];
         $cfp_usuario = $res[0]['cpf'];
+        $senha_usuario = $res[0]['senha'];
         $nivel_usuario = $res[0]['nivel'];
     }
 
@@ -49,7 +52,7 @@
         <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
         <!-- //side nav css file -->
          
-         <!-- js-->
+         <!-- js-->        
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="js/modernizr.custom.js"></script>
 
@@ -144,9 +147,15 @@
                         <span>Servidores</span>
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>
+
                         <ul class="treeview-menu">
-                         <li><a href="index.php?pag=cadastro_usuario"><i class="fa fa-angle-right"></i> Cadastrar</a></li>  
+                         <li><a href="index.php?pag=cadastro_usuario"><i class="fa fa-angle-right"></i> Cadastrar</a></li>                           
                         </ul>
+
+                        <ul class="treeview-menu">
+                         <li><a href="index.php?pag=lista_usuario"><i class="fa fa-angle-right"></i> Listar</a></li>                           
+                        </ul>
+
                       </li>            
                       
                         <li class="treeview">
@@ -192,7 +201,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                         </a>                    
                         <ul class="treeview-menu">
-                          <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Atos </a></li>
+                          <li><a href="forms.html"><i class="fa fa-angle-right"></i> Atos </a></li>
                           <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Instruções </a></li>
                           <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Manuais </a></li>
                           <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Certidões </a></li>
@@ -266,7 +275,7 @@
                                     </a>
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Configurações</a> </li> 
-                                        <li> <a href="#"><i class="fa fa-user"></i> Minha conta</a> </li>                                        
+                                        <li> <a href="" data-toggle="modal" data-target="#modalPerfil"><i class="fa fa-user"></i> Editar perfil</a> </li>                                        
                                         <li> <a href="logout.php"><i class="fa fa-sign-out"></i> Sair</a> </li>
                                     </ul>
                                 </li>
@@ -720,3 +729,91 @@
             
         </body>
         </html>
+
+
+        <div class="modal fade" id="modalPerfil" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar perfil</h5>
+                <button id="btn-fechar-perfil" type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" style = "margin-top: -20px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" id = "form-perfil">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" class="form-control" id="nome-perfil" name="nome" placeholder="Digite o nome" value="<?php echo$nome_usuario ?>" required>                    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="email-perfil" name="email" placeholder="Digite o email" value="<?php echo $email_usuario ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Matricula</label>
+                        <input type="text" class="form-control" id="matricula-perfil" name="matricula" placeholder="Digite a matricula" value="<?php echo $matricula_usuario ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Senha</label>
+                        <input type="password" class="form-control" id="senha-perfil" name="senha" placeholder="Digite a senha" value="<?php echo $senha_usuario?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Confirmar senha</label>
+                        <input type="password" class="form-control" id="conf-senha-perfil" name="conf_senha" placeholder="Confirmar a senha" required>
+                    </div>            
+                                     
+                    <input type="hidden" name = "id" value="<?php echo $id_usuario ?>">
+
+                <small><div id="mensagem-perfil" align="center"></div></small>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Editar perfil</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $("#form-perfil").submit(function () {
+    
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "editar_perfil.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+                $('#mensagem-perfil').text('');
+                $('#mensagem-perfil').removeClass()
+                if (mensagem.trim() == "Editado com Sucesso") {
+                    $('#btn-fechar-perfil').click();
+                    location.reload();
+                   
+                } else {
+
+                    $('#mensagem-perfil').addClass('text-danger')
+                    $('#mensagem-perfil').text(mensagem)
+                }
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+        });
+    });
+</script>

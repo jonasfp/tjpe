@@ -1,3 +1,11 @@
+<?php 
+
+@session_start();
+require_once('verificar.php');
+require_once('../conexao.php');
+
+ ?>
+
 <div class=" form-grids row form-grids-right">
 	<div class="widget-shadow " data-example-id="basic-forms"> 
 		<div class="form-title">
