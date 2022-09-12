@@ -6,7 +6,8 @@ require_once('../conexao.php');
 
  ?>
 
-	<div class="main-page">
+ 
+<div class="main-page">
 		<div class="col_3">
 			<div class="col-md-3 widget widget1">
 				<div class="r3_counter_box">
@@ -123,3 +124,5 @@ require_once('../conexao.php');
 		<div class="charts"> </div>		
 		
 	</div>
+
+	

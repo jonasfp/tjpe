@@ -39,7 +39,7 @@ body a:hover{
     padding: 10px 15px 10px 25px;
     font-size: 25px;
     text-transform: uppercase;
-    color: #fff;
+    color: #e5e5e5;
 }
 span.dashboard_text {
     font-size: 12px;
@@ -51,7 +51,7 @@ span.dashboard_text {
 
 
 .navbar-inverse .navbar-brand {
-    color: #b8c7ce;
+    color: #fffff;
 }
 /*-------HEADER SECTION------*/
 .navbar-inverse {
@@ -67,7 +67,7 @@ span.dashboard_text {
     z-index: 100;
 }
 .header-section {
-    background:#FFF;
+    background:#0086b2;
     box-shadow:  1px 1px 4px rgba(0, 0, 0, 0.21);
     -webkit-box-shadow:  1px 1px 4px rgba(0, 0, 0, 0.21);
     -moz-box-shadow:  1px 1px 4px rgba(0, 0, 0, 0.21);
@@ -98,7 +98,7 @@ button#showLeftPush {
     -webkit-transition: all 0.2s ease-out 0s;
     transition: all 0.2s ease-out 0s;
 	border: none;
-    background-color: #F2B33F;
+    background-color: #0086b2;
 	outline:none;
     border-radius: 50%;
     height: 40px;
@@ -806,16 +806,18 @@ ul.dropdown-menu {
     float: right;
 }
 .profile_details_drop .fa.fa-angle-up{
-	display:none;
+	display:none;      
+
 }
 .profile_details_drop.open .fa.fa-angle-up{
     display:block;
+    color: #ffffff;
 }
 .profile_details_drop.open .fa.fa-angle-down{
-	display:none;
+	display:none;    
 }
 .profile_details_drop a.dropdown-toggle {
-    display:block;
+    display:block;    
 	padding: 0.2em 3em 0 0em;
 }
 .profile_img span.prfil-img{
@@ -836,7 +838,7 @@ ul.dropdown-menu {
     position: absolute;
     top: 34%;
     right: 8%;
-    color: #333;
+    color: #ffffff;
     font-size: 1.6em;
 }
 span.prfil-img img,.activity-img img,.media>.pull-left img,.inbox-page img {
@@ -858,13 +860,13 @@ ul.dropdown-menu.drp-mnu li {
 }
 .user-name p{
 	font-size:1em;
-	color: #F2B33F;
+	color: #FFFFFF;
 	line-height:1em;
 	font-weight:700;
 }
 .user-name span {
     font-size: .75em;
-    color: #424f63;
+    color: #cccccc;
     font-weight: normal;
     margin-top: .3em;
 }

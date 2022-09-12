@@ -9,11 +9,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = count($res);
 
 if ($total_reg == 0) {
-    $pdo->query("INSERT INTO usuarios SET nome = 'Jonas Ferreira da Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', data = curDate(), ativo = 'Sim'");
-     $pdo->query("INSERT INTO usuarios SET nome = 'Edna Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
-      $pdo->query("INSERT INTO usuarios SET nome = 'Eli Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
-       $pdo->query("INSERT INTO usuarios SET nome = 'Rosa Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
-        $pdo->query("INSERT INTO usuarios SET nome = 'Paulo Paixão', email = '$email_sistema', matricula = '123456', cpf = '000.000.000-00',senha = '$senha', senha_crip = '$senha_crip', nivel = 'Servidor', data = curDate(), ativo = 'Sim'");
+    $pdo->query("INSERT INTO usuarios SET nome = 'Jonas Ferreira da Paixão', email = '$email_sistema', matricula = '123456', senha = '$senha', senha_crip = '$senha_crip', nivel = 'Administrador', data = curDate(), ativo = 'Sim'");    
     }
 
 ?>
@@ -24,7 +20,6 @@ if ($total_reg == 0) {
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <title><?php echo $nome_sistema ?></title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">

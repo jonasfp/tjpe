@@ -30,7 +30,7 @@ $pag = 'lista_usuario';
                 </button>
             </div>
             
-            <form method="post" id=form>
+            <form method="post" id="form">
 
             <div class="modal-body">
 
