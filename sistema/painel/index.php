@@ -290,11 +290,12 @@
 
 <!--footer-->
 <div class="footer">
+    <small>
  <p>&copy; Cálculos Judiciais. Todos os direitos reservados | Desenvolvido por Jonas Ferreira da Paixão</a></p>       
 </div>
 <!--//footer-->
 </div>
-
+</small>
 
 <!-- Classie --><!-- for toggle left push menu script -->
 

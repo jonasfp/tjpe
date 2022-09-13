@@ -9,7 +9,10 @@ $pag = 'calculos_civeis';
 ?>
 
 
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+
 
 <form method="post" id="formCiveis">
 
@@ -73,22 +76,21 @@ $pag = 'calculos_civeis';
 
     <td>
 
-    <div>
-    <input placeholder="Data final" type="date" id="datafinalcorrecao" name="datafinalcorrecao" class="form-control"></div>    
+    <input placeholder="Data final" type="text" id="datafinalcorrecao" name="datafinalcorrecao" class="form-control"></div>    
 
     </td>
 
     <td>
 
     <div>
-    <input placeholder="Data inicial" type="date" id="datainicialjuros" name="datainicialjuros" class="form-control"></div>
+    <input placeholder="Data inicial" type="text" id="datainicialjuros" name="datainicialjuros" class="form-control"></div>
     
     </td>
 
     <td>
 
-    <div class="md-form md-outline input-with-post-icon datepicker">
-    <input placeholder="Data final" type="date" id="datafinaljuros" name="datafinaljuros" class="form-control"></div>
+    <div>
+    <input placeholder="Data final" type="text" id="datafinaljuros" name="datafinaljuros" class="form-control"></div>
            
     </td>
 
@@ -124,7 +126,7 @@ $pag = 'calculos_civeis';
         <td>
 
     <div class="md-form md-outline input-with-post-icon datepicker">
-    <input placeholder="Data" type="date" id="dataevento" name="dataevento" class="form-control"></div>
+    <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control"></div>
                       
         </td>
 
@@ -189,6 +191,9 @@ $pag = 'calculos_civeis';
 
 </form>
 
+
+
+
 <script type="text/javascript">
 
     var pag = "<?=$pag?>"  
@@ -216,6 +221,45 @@ $('#jonas').on('click','.removerLinha',function(){
 
 
 </script>
+
+<script>    
+
+    $(document).ready(function() {
+    
+    $( "#datainicialjuros,#datafinaljuros,#datafinalcorrecao,#dataevento" ).datepicker({
+    changeMonth: true,
+    changeYear: true,
+    firstDay: 1,
+    dateFormat: 'dd/mm/yy',
+    })
+    
+    $( "#datainicialjuros" ).datepicker({ dateFormat: 'dd-mm-yy' });
+    $( "#datafinaljuros" ).datepicker({ dateFormat: 'dd-mm-yy' });
+    
+    $('#datafinaljuros').change(function() {
+    var start = $('#datainicialjuros').datepicker('getDate');
+    var end   = $('#datafinaljuros').datepicker('getDate');
+    
+    if (start<end) {
+    var juros   = (end - start)/1000/60/60/24;
+    $('#juros').val(juros);
+    }
+    else {
+    alert ("You cant come back before you have been!");
+    $('#datainicialjuros').val("");
+    $('#datafinaljuros').val("");
+    $('#juros').val("");
+    }
+    }); //end change function
+    }); //end ready
+    
+
+</script>
+
+
+
+
+
 
 
 

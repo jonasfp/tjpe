@@ -55,7 +55,8 @@ require_once('../conexao.php');
  });
 </script>                                
 
-<div class="form-group"> <div class="col-sm-offset-2"> <button type="submit" class="btn btn-default">Pesquisar</button></div> 
+<div class="form-group"> <div class="col-sm-offset-2"> <button type="submit" class="btn btn-default">Pesquisar</button></div></div>
+
 </form> 
 </div>
 </div>
