@@ -8,8 +8,6 @@ $pag = 'calculos_civeis';
 
 ?>
 
-
-  
 <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 
@@ -124,9 +122,8 @@ $pag = 'calculos_civeis';
 <tr class="linha-lancamento">  
     
         <td>
-
-    <div class="md-form md-outline input-with-post-icon datepicker">
-    <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control"></div>
+    
+    <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control">
                       
         </td>
 
@@ -202,17 +199,28 @@ $pag = 'calculos_civeis';
 
 <script src = "js/ajax2.js"></script>
 
+
+
 <script>
 
      var count = 1
     
 $('#jonas').on('click','#inserirLinha', function () {
 
+
+
    count++
    
-    $(this).closest(".linha-lancamento").after('<tr id = "campo'+count+'" class = "linha-lancamento"> <td> <div class="md-form md-outline input-with-post-icon datepicker"> <input placeholder="Data" type="date" id="dataevento" name="dataevento" class="form-control"></div> </td> <td><input type="text" class="form-control" id="historico" name="historico" placeholder="Histórico"></td> <td><input type="text" class="form-control" id="valor" name="valor" placeholder="Valor"></td> <td><input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção Monetária"></td> <td><input type="text" class="form-control" id="juros" name="juros" placeholder="Juros Moratórios"></td> <td><input type="text" class="form-control" id="total" name="total" placeholder="Total"></td> <td><div class="btn-group btn-group-sm"><button type="button" id="inserirLinha"><i class="fa fa-plus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id = "'+count+'"class= "removerLinha" ><i class="fa fa-minus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="submit" id="salvarLinha" class = "salvarLinha"><i class="fa fa-save"></i></button></div></td></tr>')
-            
+    $(this).closest(".linha-lancamento").after('<tr id = "campo'+count+'" class = "linha-lancamento"> <td><input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control"></td> <td><input type="text" class="form-control" id="historico" name="historico" placeholder="Histórico"></td> <td><input type="text" class="form-control" id="valor" name="valor" placeholder="Valor"></td> <td><input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção Monetária"></td> <td><input type="text" class="form-control" id="juros'+count+'" name="juros" placeholder="Juros Moratórios"></td> <td><input type="text" class="form-control" id="total" name="total" placeholder="Total"></td> <td><div class="btn-group btn-group-sm"><button type="button" id="inserirLinha"><i class="fa fa-plus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id = "'+count+'"class= "removerLinha" ><i class="fa fa-minus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="submit" id="salvarLinha" class = "salvarLinha"><i class="fa fa-save"></i></button></div></td></tr>')
+     
+     var jonas = document.getElementById("juros").value
+document.getElementById("juros"+count).value = jonas           
+
+
 });
+
+
+
 
 $('#jonas').on('click','.removerLinha',function(){
     var button_id = $(this).attr("id")
@@ -226,11 +234,16 @@ $('#jonas').on('click','.removerLinha',function(){
 
     $(document).ready(function() {
     
-    $( "#datainicialjuros,#datafinaljuros,#datafinalcorrecao,#dataevento" ).datepicker({
+    $("#datainicialjuros,#datafinaljuros,#datafinalcorrecao,#dataevento").datepicker({
     changeMonth: true,
     changeYear: true,
     firstDay: 1,
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
     })
     
     $( "#datainicialjuros" ).datepicker({ dateFormat: 'dd-mm-yy' });
@@ -245,17 +258,27 @@ $('#jonas').on('click','.removerLinha',function(){
     $('#juros').val(juros);
     }
     else {
-    alert ("You cant come back before you have been!");
+    alert ("Operação não permitida!");
     $('#datainicialjuros').val("");
     $('#datafinaljuros').val("");
     $('#juros').val("");
     }
-    }); //end change function
-    }); //end ready
+    });
+    });
+
+    </script>
+
+<script>
+  
+  /*  
+$(document).ready(function(){
     
+    $("#dataevento").mask("99/99/9999");
+
+});
+*/
 
 </script>
-
 
 
 
