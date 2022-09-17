@@ -123,7 +123,7 @@ $pag = 'calculos_civeis';
     
         <td>
     
-    <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control">
+        <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control">
                       
         </td>
 
@@ -218,14 +218,10 @@ $('#jonas').on('click','#inserirLinha', function () {
 
 });
 
-
-
-
-$('#jonas').on('click','.removerLinha',function(){
-    var button_id = $(this).attr("id")
-    $('#campo'+button_id).remove()
+        $('#jonas').on('click','.removerLinha',function(){
+        var button_id = $(this).attr("id")
+        $('#campo'+button_id).remove()
 })
-
 
 </script>
 
@@ -255,6 +251,12 @@ $('#jonas').on('click','.removerLinha',function(){
     if (start<end) {
     var juros   = (end - start)/1000/60/60/24;    
     $('#juros').val(juros);
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = indice*(1+juros)*valor
+
+    $('#total').val(totallinha.toFixed(2)) 
     }
     else {
     alert ("Operação não permitida!");
@@ -271,11 +273,18 @@ $('#jonas').on('click','.removerLinha',function(){
     if (start<end) {
     var juros   = (end - start)/1000/60/60/24;    
     $('#juros').val(juros);
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = indice*(1+juros)*valor
+    $('#total').val(totallinha.toFixed(2)) 
+    
     }
     
-    });
+    })
 
-    });
+    })
+    
 
     $('#indicecorrecao').prop('readonly',true);
     $('#juros').prop('readonly', true);    
@@ -310,19 +319,22 @@ $('#jonas').on('click','.removerLinha',function(){
     ]);
     
     var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val() 
-
+    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
     var resultStart = encoge.get(start)
     var resultEnd = encoge.get(end)
-
-    var result = (encoge.get(start)/encoge.get(end))
-      
+    var result = (encoge.get(start)/encoge.get(end))          
     $('#indicecorrecao').val(result);
+
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = indice*(1+juros)*valor
+    $('#total').val(totallinha.toFixed(2)) 
 
     })
 
 
-    $('#dataevento').change(function(){
+    $('#datafinalcorrecao').change(function(){
 
     const encoge = new Map([
  
@@ -351,52 +363,35 @@ $('#jonas').on('click','.removerLinha',function(){
     ]);
     
     var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val() 
-
+    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
     var resultStart = encoge.get(start)
     var resultEnd = encoge.get(end)
-
-    var result = (encoge.get(start)/encoge.get(end))
-      
+    var result = (encoge.get(start)/encoge.get(end))      
     $('#indicecorrecao').val(result);
+
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = indice*(1+juros)*valor
+    $('#total').val(totallinha.toFixed(2)) 
 
     })
 
-       
     $('#valor').change(function() {
         
     var juros = $('#juros').val()*0.01/30
     var indice = $('#indicecorrecao').val()
     var valor = parseFloat($('#valor').val())
     var totallinha = indice*(1+juros)*valor
-
     $('#total').val(totallinha.toFixed(2))        
     
     })
 
-
     </script>
 
-    <script>
-  
-  /*  
-$(document).ready(function(){
-    
-    $("#dataevento").mask("99/99/9999");
-
-});
-*/
-
-</script>
-
-<script>
-
+    <script> /* $(document).ready(function(){$("#dataevento").mask("99/99/9999");});*/</script>
 
     
-
-
-
-</script>
 
 
 
