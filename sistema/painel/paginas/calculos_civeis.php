@@ -213,9 +213,8 @@ $('#jonas').on('click','#inserirLinha', function () {
    
     $(this).closest(".linha-lancamento").after('<tr id = "campo'+count+'" class = "linha-lancamento"> <td><input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control"></td> <td><input type="text" class="form-control" id="historico" name="historico" placeholder="Histórico"></td> <td><input type="text" class="form-control" id="valor" name="valor" placeholder="Valor"></td> <td><input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção Monetária"></td> <td><input type="text" class="form-control" id="juros'+count+'" name="juros" placeholder="Juros Moratórios"></td> <td><input type="text" class="form-control" id="total" name="total" placeholder="Total"></td> <td><div class="btn-group btn-group-sm"><button type="button" id="inserirLinha"><i class="fa fa-plus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="button" id = "'+count+'"class= "removerLinha" ><i class="fa fa-minus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm"><button type="submit" id="salvarLinha" class = "salvarLinha"><i class="fa fa-save"></i></button></div></td></tr>')
      
-     var jonas = document.getElementById("juros").value
-document.getElementById("juros"+count).value = jonas           
-
+        var jonas = document.getElementById("juros").value
+        document.getElementById("juros"+count).value = jonas          
 
 });
 
@@ -254,7 +253,7 @@ $('#jonas').on('click','.removerLinha',function(){
     var end   = $('#datafinaljuros').datepicker('getDate');
     
     if (start<end) {
-    var juros   = (end - start)/1000/60/60/24;
+    var juros   = (end - start)/1000/60/60/24;    
     $('#juros').val(juros);
     }
     else {
@@ -264,11 +263,121 @@ $('#jonas').on('click','.removerLinha',function(){
     $('#juros').val("");
     }
     });
+
+    $('#datainicialjuros').change(function() {
+    var start = $('#datainicialjuros').datepicker('getDate');
+    var end   = $('#datafinaljuros').datepicker('getDate');
+    
+    if (start<end) {
+    var juros   = (end - start)/1000/60/60/24;    
+    $('#juros').val(juros);
+    }
+    
     });
+
+    });
+
+    $('#indicecorrecao').prop('readonly',true);
+    $('#juros').prop('readonly', true);    
+    $('#total').prop('readonly', true);
+
+    $('#dataevento').change(function(){
+
+    const encoge = new Map([
+ 
+        ['01-01-2021','1.1528566'],
+        ['01-02-2021','1.1497523'],
+        ['01-03-2021','1.1404010'],
+        ['01-04-2021','1.1306772'],
+        ['01-05-2021','1.1263969'],
+        ['01-06-2021','1.1156863'],
+        ['01-07-2021','1.1090321'],
+        ['01-08-2021','1.0978342'],
+        ['01-09-2021','1.0882575'],
+        ['01-10-2021','1.0753533'],
+        ['01-11-2021','1.0630222'],
+        ['01-12-2021','1.0541672'],
+        ['01-01-2022','1.0465270'],
+        ['01-02-2022','1.0395625'],
+        ['01-03-2022','1.0292698'],
+        ['01-04-2022','1.0119652'],
+        ['01-05-2022','1.0015491'],
+        ['01-06-2022','0.9970623'],
+        ['01-07-2022','0.9909186'],
+        ['01-08-2022','0.9969000'],
+        ['01-09-2022','1.0000000']         
+
+    ]);
+    
+    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
+    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val() 
+
+    var resultStart = encoge.get(start)
+    var resultEnd = encoge.get(end)
+
+    var result = (encoge.get(start)/encoge.get(end))
+      
+    $('#indicecorrecao').val(result);
+
+    })
+
+
+    $('#dataevento').change(function(){
+
+    const encoge = new Map([
+ 
+        ['01-01-2021','1.1528566'],
+        ['01-02-2021','1.1497523'],
+        ['01-03-2021','1.1404010'],
+        ['01-04-2021','1.1306772'],
+        ['01-05-2021','1.1263969'],
+        ['01-06-2021','1.1156863'],
+        ['01-07-2021','1.1090321'],
+        ['01-08-2021','1.0978342'],
+        ['01-09-2021','1.0882575'],
+        ['01-10-2021','1.0753533'],
+        ['01-11-2021','1.0630222'],
+        ['01-12-2021','1.0541672'],
+        ['01-01-2022','1.0465270'],
+        ['01-02-2022','1.0395625'],
+        ['01-03-2022','1.0292698'],
+        ['01-04-2022','1.0119652'],
+        ['01-05-2022','1.0015491'],
+        ['01-06-2022','0.9970623'],
+        ['01-07-2022','0.9909186'],
+        ['01-08-2022','0.9969000'],
+        ['01-09-2022','1.0000000']         
+
+    ]);
+    
+    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
+    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val() 
+
+    var resultStart = encoge.get(start)
+    var resultEnd = encoge.get(end)
+
+    var result = (encoge.get(start)/encoge.get(end))
+      
+    $('#indicecorrecao').val(result);
+
+    })
+
+       
+    $('#valor').change(function() {
+        
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = indice*(1+juros)*valor
+
+    $('#total').val(totallinha.toFixed(2))        
+    
+    })
+
 
     </script>
 
-<script>
+    <script>
   
   /*  
 $(document).ready(function(){
@@ -280,6 +389,14 @@ $(document).ready(function(){
 
 </script>
 
+<script>
+
+
+    
+
+
+
+</script>
 
 
 
