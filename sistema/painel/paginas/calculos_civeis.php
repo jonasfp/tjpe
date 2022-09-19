@@ -61,9 +61,11 @@ $pag = 'calculos_civeis';
 <table class="table" >
     <thead>
         <tr>
-
+          <th class="text-left" style="">ÍNDICE DE CORREÇÃO MONETÁRIA </th>      
           <th class="text-left" style="">TERMO FINAL DA CORREÇÃO MONETÁRIA </th>
-          <th class="text-left" style="">TERMO INICIAL DOS JUROS DE MORA</th>      <th class="text-left" style="">TERMO FINAL DOS JUROS DE MORA</th>               
+                <th class="text-left" style="">TIPO DE JUROS DE MORA </th>
+          <th class="text-left" style="">TERMO INICIAL DOS JUROS DE MORA</th>      
+          <th class="text-left" style="">TERMO FINAL DOS JUROS DE MORA</th>               
 
       </tr>
   </thead>
@@ -74,7 +76,37 @@ $pag = 'calculos_civeis';
 
         <td>
 
+           <form>
+             
+             <select id="selectindicecorrecao" name="selectindicecorrecao" class="form-control">
+               <option value="Encoge">ENCOGE</option>
+               <option value="Igpm">IGPM</option>
+               <option value="Ipca">IPCA</option>
+               <option value="Poupança">POUPANÇA</option>
+               <option value="Tr">TR</option>          
+           </select>
+             
+           </form>
+
+        </td>
+
+        <td>
+
             <input placeholder="Data final" type="text" id="datafinalcorrecao" name="datafinalcorrecao" class="form-control"></div>    
+
+        </td>
+
+        <td>
+
+            <form>
+             
+             <select id="selecttipojuros" name="selecttipojuros" class="form-control">
+            <option value="jurossimplesconstante">1% am durante todo o período</option>
+            <option value="jurossimplesvariavel">0,5% am até 11/02/2003 e 1% am após</option>
+
+           </select>
+             
+           </form>
 
         </td>
 
@@ -83,7 +115,7 @@ $pag = 'calculos_civeis';
             <div>
                 <input placeholder="Data inicial" type="text" id="datainicialjuros" name="datainicialjuros" class="form-control"></div>
 
-            </td>
+        </td>
 
             <td>
 
@@ -106,10 +138,10 @@ $pag = 'calculos_civeis';
 
               <th class="text-left" style="width:8%">DATA</th>
               <th class="text-left">HISTÓRICO</th>
-              <th class="text-left" style="width:10%">VALOR</th>
+              <th class="text-left" style="width:10%">VALOR (R$)</th>
               <th class="text-left" style="width:15%">CORREÇÃO MONETÁRIA</th>
-              <th class="text-left" style="width:15%">JUROS MORATÓRIOS</th>
-              <th class="text-left" style="width:15%">TOTAL</th>
+              <th class="text-left" style="width:15%">JUROS MORATÓRIOS (Nº DIAS)</th>
+              <th class="text-left" style="width:15%">TOTAL (R$)</th>
               <th class="text-center" style="width:10%">AÇÃO</th>
 
           </tr>
@@ -179,6 +211,11 @@ $pag = 'calculos_civeis';
 
     <small><div id="mensagem" align="center"></div></small>
 
+            <label for="somatotal">Total:</label><br>
+            <input type="text" class="form-control" id="somatotal" name="somatotal" style="width: 200px" placeholder="Valor total devido">           
+
+
+
     <div class="modal-footer">
 
         <button type="submit" id="salvar" class="btn btn-primary">Salvar</button>
@@ -210,7 +247,7 @@ $pag = 'calculos_civeis';
 
 
  /***************************************************inicio*****************************************************/
-$(document).ready(function() {
+$(document).ready(function(){
        /* 
         var jonas = document.getElementById("juros").value
         document.getElementById("juros"+count).value = jonas*/
@@ -218,7 +255,10 @@ $(document).ready(function() {
         var juros = $("#juros").val()
         $('#juros'+count).val(juros);
 
-        $('#datainicialjuros'+count+',#datafinaljuros'+count+',#datafinalcorrecao'+count+',#dataevento'+count).datepicker({
+
+       // $('#datainicialjuros'+count+',#datafinaljuros'+count+',#datafinalcorrecao'+count+',#dataevento'+count).
+
+        $('#dataevento'+count).datepicker({
             changeMonth: true,
             changeYear: true,
             firstDay: 1,
@@ -232,43 +272,67 @@ $(document).ready(function() {
 
        
         $('#datafinaljuros').change(function() {
-            var juros = $("#juros").val()
-            alert(juros)
+
+           var count1 = count
+
+            while(count>=2){
+
+            var juros = $("#juros").val()            
             $('#juros'+count).val(juros)
             var juros = $('#juros'+count).val()*0.01/30
             var indice = $('#indicecorrecao'+count).val()
             var valor = parseFloat($('#valor'+count).val())
             var totallinha = indice*(1+juros)*valor
-            $('#total'+count).val(totallinha.toFixed(2)) 
-        });
-
-        $('#datainicialjuros').change(function() {
-            var start = $('#datainicialjuros').datepicker('getDate');
-            var end   = $('#datafinaljuros').datepicker('getDate');
-
-            if (start<end) {
-                var juros   = (end - start)/1000/60/60/24;    
-                $('#juros'+count).val(juros);
-                var juros = $('#juros'+count).val()*0.01/30
-                var indice = $('#indicecorrecao'+count).val()
-                var valor = parseFloat($('#valor'+count).val())
-                var totallinha = indice*(1+juros)*valor
-                $('#total'+count).val(totallinha.toFixed(2)) 
+            $('#total'+count).val(totallinha.toFixed(2))
+            count--
 
             }
+            
+           count = count*count1
+
 
         })
 
-    })
+        $('#datainicialjuros').change(function() {
+          
+          var count1 = count
+
+            while(count>=2){
+
+            var juros = $("#juros").val()           
+            $('#juros'+count).val(juros)
+            var juros = $('#juros'+count).val()*0.01/30
+            var indice = $('#indicecorrecao'+count).val()
+            var valor = parseFloat($('#valor'+count).val())
+            var totallinha = indice*(1+juros)*valor
+            $('#total'+count).val(totallinha.toFixed(2))
+            count-- 
+
+             }
+            
+           count = count*count1
+
+
+            })
+
+    //})
     
 
     $('#indicecorrecao'+count).prop('readonly',true);
     $('#juros'+count).prop('readonly', true);    
     $('#total'+count).prop('readonly', true);
 
-    $('#dataevento'+count).change(function(){        
 
-        const encoge = new Map([
+
+
+    $('#dataevento'+count).change(function(){
+
+        var count1 = count
+
+        
+        while(count>=2){
+
+            const encoge = new Map([
 
             ['01-01-2021','1.1528566'],
             ['01-02-2021','1.1497523'],
@@ -295,18 +359,24 @@ $(document).ready(function() {
             ]);
 
         var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-        alert(end)
+
         var start = $('#dataevento'+count).datepicker({dateFormat: 'dd-MM-yyyy'}).val()
         var resultStart = encoge.get(start)
         var resultEnd = encoge.get(end)
         var result = (encoge.get(start)/encoge.get(end))          
-        $('#indicecorrecao'+count).val(result);
+        $('#indicecorrecao'+count).val(result.toFixed(7));
 
         var juros = $('#juros'+count).val()*0.01/30
         var indice = $('#indicecorrecao'+count).val()
         var valor = parseFloat($('#valor'+count).val())
         var totallinha = indice*(1+juros)*valor
         $('#total'+count).val(totallinha.toFixed(2)) 
+
+        count--
+
+        }
+
+        count = count*count1
 
     })
 
@@ -340,18 +410,30 @@ $(document).ready(function() {
             ]);
 
         var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
+
+        var count1 = count
+
+        while(count>=2){    
+        
         var start = $('#dataevento'+count).datepicker({dateFormat: 'dd-MM-yyyy'}).val()
         var resultStart = encoge.get(start)
         var resultEnd = encoge.get(end)
         var result = (encoge.get(start)/encoge.get(end))      
-        $('#indicecorrecao'+count).val(result);
+        $('#indicecorrecao'+count).val(result.toFixed(7));
 
         var juros = $('#juros'+count).val()*0.01/30
         var indice = $('#indicecorrecao'+count).val()
         var valor = parseFloat($('#valor'+count).val())
         var totallinha = indice*(1+juros)*valor
-        $('#total'+count).val(totallinha.toFixed(2)) 
+        $('#total'+count).val(totallinha.toFixed(2))
 
+        count--
+
+        }
+        
+        count = count*count1
+
+        
     })
 
     $('#valor'+count).change(function() {
@@ -360,21 +442,21 @@ $(document).ready(function() {
         var indice = $('#indicecorrecao'+count).val()
         var valor = parseFloat($('#valor'+count).val())
         var totallinha = indice*(1+juros)*valor
-        $('#total'+count).val(totallinha.toFixed(2))        
+        $('#total'+count).val(totallinha.toFixed(2))       
 
-    }) 
+    })
 
 
  /*****************************************fim********************************************************/ 
 
- });
+ })
 
     $('#jonas').on('click','.removerLinha',function(){
         var button_id = $(this).attr("id")
         $('#campo'+button_id).remove()
     })   
 
-
+})
 
 </script>
 
@@ -476,7 +558,7 @@ $(document).ready(function() {
         var resultStart = encoge.get(start)
         var resultEnd = encoge.get(end)
         var result = (encoge.get(start)/encoge.get(end))          
-        $('#indicecorrecao').val(result);
+        $('#indicecorrecao').val(result.toFixed(7));
 
         var juros = $('#juros').val()*0.01/30
         var indice = $('#indicecorrecao').val()
@@ -520,7 +602,7 @@ $(document).ready(function() {
         var resultStart = encoge.get(start)
         var resultEnd = encoge.get(end)
         var result = (encoge.get(start)/encoge.get(end))      
-        $('#indicecorrecao').val(result);
+        $('#indicecorrecao').val(result.toFixed(7));
 
         var juros = $('#juros').val()*0.01/30
         var indice = $('#indicecorrecao').val()
