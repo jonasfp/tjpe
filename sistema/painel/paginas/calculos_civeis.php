@@ -207,18 +207,88 @@ $pag = 'calculos_civeis';
 
     </table>
 
+
+<!--**************************Honorários*****************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold">HONORÁRIOS SUCUMBENCIAIS:</h5>
+    <select id="honorarios" name="honorarios" onclick="honorarios()" class="form-control" style="margin-left:0.50em">
+            <option selected>Escolha</option>
+
+            <option value="condenacao">Sobre o valor da condenação</option>
+            <option value="causa">Sobre o valor da causa</option>
+            <option value="valor">Valor determinado</option>
+            <option value="semhonorarios">Sem honorários</option>
+            
+    </select>
+
+    <input type="text" placeholder="Histórico" id="historicocondenacao" class="form-control">
+    <input type="text" placeholder="Percentual (%)" id="percentualcondenacao" class="form-control" >
+    <input type="text" placeholder="Histórico" id="historicocausa" class="form-control">
+    <input type="text" placeholder="Valor da Causa" id="valorcausa" class="form-control">
+    <input type="text" placeholder="Percentual(%)" id="percentualcausa" class="form-control">
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausa" class="form-control">
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorarioscausa" class="form-control">
+    <input type="text" placeholder="Histórico" id="historicovalor" class="form-control">
+    <input type="text" placeholder="Valor determinado" id="valordeterminado" class="form-control">       
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaovalor" class="form-control">
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorariosvalor" class="form-control">
+
+</form>
+
+<!--******************************************************************--> 
+
+
+<!--***********************Custas*************************************-->
+
+  <form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em;">CUSTAS PROCESSUAIS:</h5>
+    <select id="custas" name="custas" onclick="custas()" class="form-control" style="margin-left:0.50em">
+            <option selected>Escolha</option>
+
+            <option value="custasiniciais">Iniciais</option>
+            <option value="custascomplementar">Complementares</option>
+            <option value="custascumprimento">Cumprimento de sentença</option>
+            <option value="custasapelacao">Apelação</option>
+            <option value="custasoutros">Outros</option>
+            
+    </select>
+
+    <input type="text" placeholder="Data" id="custasdata" class="form-control">
+    <input type="text" placeholder="Histórico" id="custashistorico" class="form-control">    
+    <input type="text" placeholder="Valor" id="custasvalor" class="form-control">    
+    <input type="text" placeholder="Índice correção" id="custasindice" class="form-control">
+    <input type="text" placeholder="Custas atualizadas" id="custasatualizadas" class="form-control">    
+
+</form>
+
+<!--*******************************************************************-->  
+<!--*******************Honorários+Art.523*****************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold; margin-top:2.0em;">HONORÁRIOS + MULTA ART. 523</h5>
+    <select id="honorariosmultaart523" name="honorariosmultaart523" onclick="honorariosmulta()" class="form-control" style="margin-left:0.50em">
+            <option selected>Escolha</option>
+
+            <option value="honorariosmultaart523">Honorários + Multa Art. 523</option>          
+          
+    </select>
+
+    <input type="text" placeholder="Histórico" id="historicoart523" class="form-control">
+    <input type="text" placeholder="Percentual (%)" id="percentualart523" class="form-control" >
+    
+</form>
+
+<!--******************************************************************-->
+
+
     <input type="hidden" name = "id">
 
-    <small><div id="mensagem" align="center"></div></small>
+    <small><div id="mensagem" align="center"></div></small>               
 
-            <label for="somatotal">Total:</label><br>
-            <input type="text" class="form-control" id="somatotal" name="somatotal" style="width: 200px" placeholder="Valor total devido">           
+     <div class="modal-footer">
 
-
-
-    <div class="modal-footer">
-
-        <button type="submit" id="salvar" class="btn btn-primary">Salvar</button>
+    <button type="submit" id="salvar" class="btn btn-primary">Salvar</button>
 
     </div>
 
@@ -442,12 +512,13 @@ $(document).ready(function(){
         var indice = $('#indicecorrecao'+count).val()
         var valor = parseFloat($('#valor'+count).val())
         var totallinha = indice*(1+juros)*valor
-        $('#total'+count).val(totallinha.toFixed(2))       
+        $('#total'+count).val(totallinha.toFixed(2))
+        
 
     })
 
 
- /*****************************************fim********************************************************/ 
+ /************************fim************************************/ 
 
  })
 
@@ -512,12 +583,9 @@ $(document).ready(function(){
                 var indice = $('#indicecorrecao').val()
                 var valor = parseFloat($('#valor').val())
                 var totallinha = indice*(1+juros)*valor
-                $('#total').val(totallinha.toFixed(2)) 
-
+                $('#total').val(totallinha.toFixed(2))
             }
-
         })
-
     })
     
 
@@ -622,7 +690,168 @@ $(document).ready(function(){
 
     })
 
+/****************************Honorários********************************/
+            
+            $('#historicocondenacao').hide()
+            $('#percentualcondenacao').hide()
+            $('#historicovalor').hide()
+            $('#valordeterminado').hide()
+            $('#datadistribuicaovalor').hide()
+            $('#indicedecorrecaohonorariosvalor').hide()               
+            $('#historicocausa').hide()
+            $('#valorcausa').hide()
+            $('#percentualcausa').hide()
+            $('#datadistribuicaocausa').hide()
+            $('#indicedecorrecaohonorarioscausa').hide() 
+
+    $("#honorarios").click(function(){
+
+        var honorarios = document.getElementById('honorarios').value        
+          
+           if(honorarios=="causa"){ 
+
+               $('#historicocondenacao').hide()
+               $('#percentualcondenacao').hide()
+               $('#historicovalor').hide()
+               $('#valordeterminado').hide()
+               $('#datadistribuicaovalor').hide()
+               $('#indicedecorrecaohonorariosvalor').hide()
+               
+               $('#historicocausa').show()
+               $('#valorcausa').show()
+               $('#percentualcausa').show()
+               $('#datadistribuicaocausa').show()
+               $('#indicedecorrecaohonorarioscausa').show()                                                               
+
+           } else if(honorarios == "condenacao"){
+
+               $('#historicocausa').hide()
+               $('#valorcausa').hide()
+               $('#percentualcausa').hide()
+               $('#datadistribuicaocausa').hide()                
+               $('#indicedecorrecaohonorarioscausa').hide()               
+
+               $('#historicovalor').hide()
+               $('#valordeterminado').hide()
+               $('#datadistribuicaovalor').hide()
+               $('#indicedecorrecaohonorariosvalor').hide()
+
+               $('#historicocondenacao').show()
+               $('#percentualcondenacao').show()               
+
+
+           } else if(honorarios == "valor"){
+
+               $('#historicocausa').hide()
+               $('#valorcausa').hide()
+               $('#percentualcausa').hide()
+               $('#datadistribuicaocausa').hide()                
+               $('#indicedecorrecaohonorarioscausa').hide()               
+
+               $('#historicovalor').show()
+               $('#valordeterminado').show()
+               $('#datadistribuicaovalor').show()
+               $('#indicedecorrecaohonorariosvalor').show()
+
+               $('#historicocondenacao').hide()
+               $('#percentualcondenacao').hide()     
+
+
+           } else {
+
+
+               $('#historicocausa').hide()
+               $('#valorcausa').hide()
+               $('#percentualcausa').hide()
+               $('#datadistribuicaocausa').hide()                
+               $('#indicedecorrecaohonorarioscausa').hide()               
+
+               $('#historicovalor').hide()
+               $('#valordeterminado').hide()
+               $('#datadistribuicaovalor').hide()
+               $('#indicedecorrecaohonorariosvalor').hide()
+
+               $('#historicocondenacao').hide()
+               $('#percentualcondenacao').hide() 
+
+           }    
+  })
+
+/***********************************************************************/
+
+/*********************************Custas********************************/
+            
+            $('#custasdata').hide()
+            $('#custashistorico').hide()
+            $('#custasvalor').hide()
+            $('#custasindice').hide()
+            $('#custasatualizadas').hide()           
+
     
+    $("#custas").click(function(){
+
+        var custas = document.getElementById('custas').value      
+          
+           if(custas=="custasiniciais" || custas=="custascomplementar" ||custas=="custasapelacao" || custas =="custascumprimento" || custas =="custasoutros"){ 
+
+            $('#custasdata').show()
+            $('#custashistorico').show()
+            $('#custasvalor').show()
+            $('#custasindice').show()
+            $('#custasatualizadas').show() 
+
+           } else {
+
+            $('#custasdata').hide()
+            $('#custashistorico').hide()
+            $('#custasvalor').hide()
+            $('#custasindice').hide()
+            $('#custasatualizadas').hide() 
+
+           }   
+  })
+
+/***********************************************************************/
+  
+/*********************Honorários+Multa Art. 523*************************/
+            
+            $('#historicoart523').hide()
+            $('#percentualart523').hide()                   
+
+    
+    $("#honorariosmultaart523").click(function(){
+
+        var honorariosmultaart523 = document.getElementById('honorariosmultaart523').value      
+          
+           if(honorariosmultaart523=="honorariosmultaart523"){ 
+
+            $('#historicoart523').show()
+            $('#percentualart523').show()
+             
+
+           } else {
+
+            $('#historicoart523').hide()
+            $('#percentualart523').hide()
+            
+
+           }   
+  })
+
+/***********************************************************************/  
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <script> /* $(document).ready(function(){$("#dataevento").mask("99/99/9999");});*/</script>
