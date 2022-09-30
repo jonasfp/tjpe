@@ -35,6 +35,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />      
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
+        <link rel="stylesheet" href="css/relatorio.css">
+
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 
@@ -117,7 +119,7 @@
 </head> 
 <body class="cbp-spmenu-push">
     <div class="main-content">
-        <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"  id="cbp-spmenu-s1">
             <!--left-fixed -navigation-->
             <aside class="sidebar-left">
               <nav class="navbar navbar-inverse">
@@ -174,45 +176,45 @@
 
               <li class="treeview">
                 <a href="#">
-                 <i class="fa fa-search"></i> <span>Pesquisar</span>
-                 <i class="fa fa-angle-left pull-right"></i>
-             </a>                    
-             <ul class="treeview-menu">
-              <li><a href="index.php?pag=pesquisa_processos"><i class="fa fa-angle-right"></i> Processos</a></li>                                       
+                   <i class="fa fa-search"></i> <span>Pesquisar</span>
+                   <i class="fa fa-angle-left pull-right"></i>
+               </a>                    
+               <ul class="treeview-menu">
+                  <li><a href="index.php?pag=pesquisa_processos"><i class="fa fa-angle-right"></i> Processos</a></li>                                       
+              </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+               <i class="fa fa-file"></i> <span>Arquivos</span>
+               <i class="fa fa-angle-left pull-right"></i>
+           </a>                    
+           <ul class="treeview-menu">
+              <li><a href="forms.html"><i class="fa fa-angle-right"></i> Atos </a></li>
+              <li><a href="https://www.tjpe.jus.br/documents/10180/0/-/f8e607be-c5e2-243c-84cf-b66a73c77d65"><i class="fa fa-angle-right"></i> Enunciados </a></li>
+              <li><a href="https://www.gilbertomelo.com.br/pdf/Instrucao_de_Servico_Contadores_DJ185_2011_05_10_2011_TJPE.pdf"><i class="fa fa-angle-right"></i> Instruções </a></li>
+              <li><a href="#"><i class="fa fa-angle-right"></i> Manuais </a></li>
+              <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Certidões </a></li>
+              <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Planilhas </a></li>                                                                 
           </ul>
       </li>
 
       <li class="treeview">
         <a href="#">
-         <i class="fa fa-file"></i> <span>Arquivos</span>
-         <i class="fa fa-angle-left pull-right"></i>
-     </a>                    
-     <ul class="treeview-menu">
-      <li><a href="forms.html"><i class="fa fa-angle-right"></i> Atos </a></li>
-      <li><a href="https://www.tjpe.jus.br/documents/10180/0/-/f8e607be-c5e2-243c-84cf-b66a73c77d65"><i class="fa fa-angle-right"></i> Enunciados </a></li>
-      <li><a href="https://www.gilbertomelo.com.br/pdf/Instrucao_de_Servico_Contadores_DJ185_2011_05_10_2011_TJPE.pdf"><i class="fa fa-angle-right"></i> Instruções </a></li>
-      <li><a href="#"><i class="fa fa-angle-right"></i> Manuais </a></li>
-      <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Certidões </a></li>
-      <li><a href="index.php?pag=relatorio_servidores"><i class="fa fa-angle-right"></i> Planilhas </a></li>                                                                 
-  </ul>
-</li>
+           <i class="fa fa-file"></i> <span>Adicionar</span>
+           <i class="fa fa-angle-left pull-right"></i>
+       </a>                    
+       <ul class="treeview-menu">
+          <li><a href="index.php?pag=adiciona_arquivos"><i class="fa fa-angle-right"></i> Arquivos </a></li>                                                                                                               
+      </ul>
+  </li>
 
-<li class="treeview">
+  <li class="treeview">
     <a href="#">
-     <i class="fa fa-file"></i> <span>Adicionar</span>
-     <i class="fa fa-angle-left pull-right"></i>
- </a>                    
- <ul class="treeview-menu">
-  <li><a href="index.php?pag=adiciona_arquivos"><i class="fa fa-angle-right"></i> Arquivos </a></li>                                                                                                               
-</ul>
-</li>
-
-<li class="treeview">
-    <a href="#">
-     <i class="fa fa-link"></i> <span>Links</span>
-     <i class="fa fa-angle-left pull-right"></i>
- </a>                    
- <ul class="treeview-menu">
+       <i class="fa fa-link"></i> <span>Links</span>
+       <i class="fa fa-angle-left pull-right"></i>
+   </a>                    
+   <ul class="treeview-menu">
     <li><a href="https://pje.tjpe.jus.br/1g/login.seam"><i class="fa fa-angle-right"></i> PJE </a></li>
     <li><a href="https://www.tjpe.jus.br/custasjudiciais/xhtml/main.xhtml"><i class="fa fa-angle-right"></i> SICAJUD </a></li>
     <li><a href="https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries"><i class="fa fa-angle-right"></i> Séries Temporais - BCB </a></li>
@@ -236,7 +238,7 @@
 <!--left-fixed -navigation-->
 
 <!-- header-starts -->
-<div class="sticky-header header-section ">
+<div class="sticky-header header-section no-print">
     <div class="header-left">
         <!--toggle button start-->
         <button id="showLeftPush"><i class="fa fa-bars"></i></button>
@@ -246,7 +248,7 @@
     </div>
 
     <div class="header-right">                    
-     <div class="profile_details">       
+       <div class="profile_details">       
         <ul>
             <li class="dropdown profile_details_drop">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -289,11 +291,11 @@
 
 
 <!--footer-->
-<div class="footer">
+<div class="footer no-print">
     <small>
- <p>&copy; Cálculos Judiciais. Todos os direitos reservados | Desenvolvido por Jonas Ferreira da Paixão</a></p>       
-</div>
-<!--//footer-->
+       <p>&copy; Cálculos Judiciais. Todos os direitos reservados | Desenvolvido por Jonas Ferreira da Paixão</a></p>       
+   </div>
+   <!--//footer-->
 </div>
 </small>
 
@@ -335,18 +337,18 @@
 
 -->
 
-    <!-- side nav js -->
-    <script src='js/SidebarNav.min.js' type='text/javascript'></script>
-    <script>
-      $('.sidebar-menu').SidebarNav()
-  </script>
-  <!-- //side nav js -->
+<!-- side nav js -->
+<script src='js/SidebarNav.min.js' type='text/javascript'></script>
+<script>
+  $('.sidebar-menu').SidebarNav()
+</script>
+<!-- //side nav js -->
 
 
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="js/bootstrap.js"> </script>
-  <!-- //Bootstrap Core JavaScript -->
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.js"> </script>
+<!-- //Bootstrap Core JavaScript -->
 
 </body>
 </html>

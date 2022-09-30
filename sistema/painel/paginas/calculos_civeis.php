@@ -10,20 +10,26 @@ $pag = 'calculos_civeis';
 
 <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="css/relatorio.css">
 
 <!--**********************Ínicio form principal******************************-->
 
 <!--**********************Tabela dados do processo***************************-->
+<div style="display: flex; justify-content: center; margin-bottom:1.0em;"> <img src="../img/tjpe.png"> </div>
+<h3 style="text-align:center">TRIBUNAL DE JUSTIÇA DE PERNAMBUCO</h3>     
+
+<h4 style="text-align:center">CONTADORIA</h4>
+<h5 style="text-align:center; margin-bottom: 3.0em;">FORUM DES. RODOLFO AURELIANO - AV. DES. GUERRA BARRETO, S/N - ILHA DO LEITE - RECIFE /PE</h5>                
 
 <form method="post" id="formCiveis">
 
     <table class="table table-hover">
         <thead>
             <tr>
-              <th class="text-left" style="width:15%">NÚMERO DO PROCESSO </th>
-              <th class="text-left" style="width:15%">VARA</th>          
-              <th class="text-left" style="width:10%">EXEQUENTE</th>
-              <th class="text-left" style="width:10%">EXECUTADO</th>        
+              <th class="text-left fonte-print" style="width:15%">NÚMERO DO PROCESSO </th>
+              <th class="text-left fonte-print" style="width:15%">VARA</th>          
+              <th class="text-left fonte-print" style="width:10%">EXEQUENTE</th>
+              <th class="text-left fonte-print" style="width:10%">EXECUTADO</th>        
 
 
           </tr>
@@ -62,14 +68,14 @@ $pag = 'calculos_civeis';
 
 <!--**********************Tabela correção+juros****************************-->
 
-<table class="table" >
+<table class="table table-hover" >
     <thead>
         <tr>
-          <th class="text-left" style="">ÍNDICE DE CORREÇÃO MONETÁRIA </th>      
-          <th class="text-left" style="">TERMO FINAL DA CORREÇÃO MONETÁRIA </th>
-          <th class="text-left" style="">TIPO DE JUROS DE MORA </th>
-          <th class="text-left" style="">TERMO INICIAL DOS JUROS DE MORA</th>      
-          <th class="text-left" style="">TERMO FINAL DOS JUROS DE MORA</th>               
+          <th class="text-left fonte-print">CORREÇÃO MONETÁRIA </th>     
+          <th class="text-left fonte-print" style="width: 17%;">TERMO FINAL</th>
+          <th class="text-left fonte-print" style="width: 25%;">JUROS DE MORA </th>
+          <th class="text-left fonte-print" style="width: 17%;">TERMO INICIAL</th>     
+          <th class="text-left fonte-print" style="width: 17%;">TERMO FINAL</th>               
 
       </tr>
   </thead>
@@ -142,13 +148,13 @@ $pag = 'calculos_civeis';
     <thead>
         <tr>
 
-          <th class="text-left" style="width:8%">DATA</th>
-          <th class="text-left">HISTÓRICO</th>
-          <th class="text-left" style="width:10%">VALOR (R$)</th>
-          <th class="text-left" style="width:15%">CORREÇÃO MONETÁRIA</th>
-          <th class="text-left" style="width:15%">JUROS MORATÓRIOS (Nº DIAS)</th>
-          <th class="text-left" style="width:15%">TOTAL (R$)</th>
-          <th class="text-center" style="width:10%">AÇÃO</th>
+          <th class="text-left fonte-print" style="width:12%">DATA</th>
+          <th class="text-left fonte-print">HISTÓRICO</th>
+          <th class="text-left fonte-print" style="width:10%">VALOR (R$)</th>
+          <th class="text-left fonte-print" style="width:20%">CORREÇÃO MONETÁRIA</th>
+          <th class="text-left fonte-print" style="width:20%">JUROS DE MORA (Nº DIAS)</th>
+          <th class="text-left fonte-print" style="width:10%">TOTAL (R$)</th>
+          <th class="text-center no-print fonte-print" style="width:10%">AÇÃO</th>
 
       </tr>
   </thead>
@@ -194,18 +200,18 @@ $pag = 'calculos_civeis';
 
         <td>
 
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group btn-group-sm no-print">
                 <button type="button" form="formCiveis" id="inserirLinha" name="inserirLinha"><i class="fa fa-plus" aria-hidden="true" title="Inserir linha"></i></button>
             </div>
 
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group btn-group-sm no-print">
                 <button type="button" form="formCiveis" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
             </div>
 
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group btn-group-sm no-print">
                 <button type="button" form="formCiveis" id="removerLinha" ><i class="fa fa-minus" aria-hidden="true" title="Remover linha"></i></button>
             </div>
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group btn-group-sm no-print">
                 <button type="submit" id="salvarLinha" class="salvarLinha"><i class="fa fa-save" title="Salvar linha"></i></button>
             </div>
 
@@ -220,7 +226,7 @@ $pag = 'calculos_civeis';
 <!--<div align="right"><h4 id="exibir" style="margin-bottom: 1.0em; margin-right: 18em;color: red;font-weight: bold;"><h4></div>-->
 
 
-<div align="right" style="margin-right:12em ;">
+<div align="right" class="margin-print" style="margin-right:12em ;">
 <!--
     <label for="exibir" style="margin-bottom: 1.0em; margin-right:20.4em;color: red;font-weight: bold; width:14%"> SUBTOTAL:</label>
 
@@ -240,7 +246,7 @@ $pag = 'calculos_civeis';
 <!--**************************Honorários*****************************-->
 
 <form class="form-inline">
-    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold">HONORÁRIOS SUCUMBENCIAIS:</h5>
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold" class="fonte-print">HONORÁRIOS SUCUMBENCIAIS:</h5>
     <select id="honorarios" name="honorarios" onclick="honorarios()" class="form-control" style="margin-left:0.50em">
         <option selected>Escolha</option>
 
@@ -253,19 +259,21 @@ $pag = 'calculos_civeis';
 
     <input type="text" placeholder="Histórico" id="historicocondenacao" class="form-control">
     <input type="text" placeholder="Percentual (%)" id="percentualcondenacao" class="form-control">
-    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausa" class="form-control">
-    <input type="text" placeholder="Histórico" id="historicocausa" class="form-control">
-    <input type="text" placeholder="Valor da Causa" id="valorcausa" class="form-control">
-    <input type="text" placeholder="Percentual(%)" id="percentualcausa" class="form-control">    
-    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorarioscausa" class="form-control">
-    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalor" class="form-control">
-    <input type="text" placeholder="Histórico" id="historicovalor" class="form-control">
-    <input type="text" placeholder="Valor determinado" id="valordeterminado" class="form-control">    
+
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausa" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicocausa" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor da Causa" id="valorcausa" class="form-control" style="width:8%">
+    <input type="text" placeholder="Percentual(%)" id="percentualcausa" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorarioscausa" class="form-control" style="width:15%">
     
-    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorariosvalor" class="form-control">
-    <input type="text" placeholder="Total" id="honorariostotalcondenacao" class="form-control">
-    <input type="text" placeholder="Total" id="honorariostotalcausa" class="form-control">
-    <input type="text" placeholder="Total" id="honorariostotaldeterminado" class="form-control">
+    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalor" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicovalor" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor determinado" id="valordeterminado" class="form-control" style="width:8%">
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorariosvalor" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Total" id="honorariostotalcondenacao" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="honorariostotalcausa" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="honorariostotaldeterminado" class="form-control" style="width:8%">
 
     
 </form>
@@ -276,7 +284,7 @@ $pag = 'calculos_civeis';
 <!--***********************Custas*************************************-->
 
 <form class="form-inline">
-    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em;">CUSTAS PROCESSUAIS:</h5>
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em;" class="fonte-print">CUSTAS PROCESSUAIS:</h5>
     <select id="custas" name="custas" onclick="custas()" class="form-control" style="margin-left:0.50em">
         <option selected>Escolha</option>
 
@@ -289,11 +297,11 @@ $pag = 'calculos_civeis';
 
     </select>
 
-    <input type="text" placeholder="Data" id="custasdata" class="form-control">
-    <input type="text" placeholder="Histórico" id="custashistorico" class="form-control">    
-    <input type="text" placeholder="Valor" id="custasvalor" class="form-control">    
-    <input type="text" placeholder="Índice correção" id="indicecorrecaocustas" class="form-control">
-    <input type="text" placeholder="Custas atualizadas" id="custasatualizadas" class="form-control">    
+    <input type="text" placeholder="Data" id="custasdata" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="custashistorico" class="form-control" style="width:20%">    
+    <input type="text" placeholder="Valor" id="custasvalor" class="form-control"style="width:8%">    
+    <input type="text" placeholder="Índice correção" id="indicecorrecaocustas" class="form-control" style="width:15%">
+    <input type="text" placeholder="Custas atualizadas" id="custasatualizadas" class="form-control" style="width:8%">    
 
 </form>
 
@@ -302,7 +310,7 @@ $pag = 'calculos_civeis';
 <!--*******************Honorários+Art.523*****************************-->
 
 <form class="form-inline">
-    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold; margin-top:2.0em;">HONORÁRIOS + MULTA ART. 523</h5>
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold; margin-top:2.0em;" class="fonte-print">HONORÁRIOS + MULTA ART. 523</h5>
     <select id="honorariosmultaart523" name="honorariosmultaart523" onclick="honorariosmulta()" class="form-control" style="margin-left:0.50em">
         <option selected>Escolha</option>
 
@@ -311,9 +319,9 @@ $pag = 'calculos_civeis';
 
     </select>
 
-    <input type="text" placeholder="Histórico" id="historicoart523" class="form-control">
-    <input type="text" placeholder="Percentual (%)" id="percentualart523" class="form-control" >
-    <input type="text" placeholder="Total" id="totalart523" class="form-control" >
+    <input type="text" placeholder="Histórico" id="historicoart523" class="form-control" style="width:20%">
+    <input type="text" placeholder="Percentual (%)" id="percentualart523" class="form-control" style="width:8%" >
+    <input type="text" placeholder="Total" id="totalart523" class="form-control" style="width:8%">
     
 </form>
 
@@ -322,7 +330,7 @@ $pag = 'calculos_civeis';
 <!--**************************Multas*****************************-->
 
 <form class="form-inline">
-    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em">MULTAS:</h5>
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em" class="fonte-print">MULTAS:</h5>
     
     <select id="multas" name="multas" onclick="multas()" class="form-control" style="margin-left:0.50em">
 
@@ -335,28 +343,31 @@ $pag = 'calculos_civeis';
 
     </select>
 
-    <input type="text" placeholder="Histórico" id="historicocondenacaomulta" name="historicocondenacaomulta" class="form-control">
-    <input type="text" placeholder="Percentual (%)" id="percentualcondenacaomulta" name="percentualcondenacaomulta" class="form-control">
+    <input type="text" placeholder="Histórico" id="historicocondenacaomulta" name="historicocondenacaomulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Percentual (%)" id="percentualcondenacaomulta" name="percentualcondenacaomulta" class="form-control" style="width:8%">
 
-    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausamulta" name="datadistribuicaocausamulta" class="form-control">
-    <input type="text" placeholder="Histórico" id="historicocausamulta" name="historicocausamulta" class="form-control">
-    <input type="text" placeholder="Valor da Causa" id="valorcausamulta" name="valorcausamulta" class="form-control">
-    <input type="text" placeholder="Percentual(%)" id="percentualcausamulta" name="percentualcausamulta" class="form-control">    
-    <input type="text" placeholder="Índice de correcao multa" id="indicedecorrecaocausamulta" name="indicedecorrecaocausamulta" class="form-control">
-    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalormulta" name="datadistribuicaovalormulta" class="form-control">
-    <input type="text" placeholder="Histórico" id="historicovalormulta" name="historicovalormulta" class="form-control">
-    <input type="text" placeholder="Valor determinado" id="valordeterminadomulta" name="valordeterminadomulta" class="form-control">   
-    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaovalormulta" id="indicedecorrecaovalormulta" class="form-control">
-    <input type="text" placeholder="Data de início" id="datainiciomultadiaria" name="datainiciomultadiaria" class="form-control">
-    <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control"> 
-    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control">
-    <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" >
-    <input type="text" placeholder="Valor limite" id="valorlimitemulta" name="valorlimitemulta" class="form-control">    
-    <input type="text" placeholder="Índice correção" id="indicecorrecaomultadiaria" name="indicecorrecaomultadiaria" class="form-control">
-    <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmulta" class="form-control">
-    <input type="text" placeholder="Total" id="totalmultacausa"  name="totalmulta" class="form-control">
-    <input type="text" placeholder="Total" id="totalmultadeterminado"  name="totalmulta" class="form-control">
-    <input type="text" placeholder="Total" id="totalmultadiaria"  name="totalmulta" class="form-control">
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausamulta" name="datadistribuicaocausamulta" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicocausamulta" name="historicocausamulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor da Causa" id="valorcausamulta" name="valorcausamulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Percentual(%)" id="percentualcausamulta" name="percentualcausamulta" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice de correcao multa" id="indicedecorrecaocausamulta" name="indicedecorrecaocausamulta" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalormulta" name="datadistribuicaovalormulta" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicovalormulta" name="historicovalormulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor determinado" id="valordeterminadomulta" name="valordeterminadomulta" class="form-control" style="width:8%">   
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaovalormulta" id="indicedecorrecaovalormulta" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Data de início" id="datainiciomultadiaria" name="datainiciomultadiaria" class="form-control" style="width:12%">
+    <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control" style="width:8%"> 
+    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:15%">
+    <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" style="width:8%" >
+    <input type="text" placeholder="Valor limite" id="valorlimitemulta" name="valorlimitemulta" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice correção" id="indicecorrecaomultadiaria" name="indicecorrecaomultadiaria" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultacausa"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultadeterminado"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultadiaria"  name="totalmulta" class="form-control" style="width:8%">
     
 </form>
 
@@ -385,7 +396,12 @@ $pag = 'calculos_civeis';
 
 <div class="modal-footer">
 
-    <button type="submit" id="salvar" class="btn btn-primary">Salvar</button>
+    <!--<button type="submit" id="salvar" class="btn btn-primary">Salvar</button>-->
+    <button onclick="window.print()" id="gerarrelatorio" class="btn btn-primary no-print">Gerar Relatório</button>
+
+    <!--<a href="../rel/relatorio.php"> Relatório </a>-->
+
+
 
 </div>
 
