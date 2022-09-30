@@ -140,7 +140,7 @@ $pag = 'calculos_civeis';
 
 </table>
 
-<!--**********************Fim da tabela correção+multa**********************-->
+<!--**********************Fim da tabela correção+juros**********************-->
 
 <!--*****************************Tabela parcelas****************************-->
 
@@ -195,7 +195,7 @@ $pag = 'calculos_civeis';
 
             <!------------------Problema no banco corrigir no do ID--------->
 
-            <input type="text" class="form-control" id="total1" name="total1" placeholder="Total">             
+            <input type="text" class="form-control" id="total" name="total" placeholder="Total">             
         </td>
 
         <td>
