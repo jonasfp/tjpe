@@ -153,15 +153,23 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                          <li><a href="index.php?pag=calculos_civeis"><i class="fa fa-angle-right"></i>Cíveis</a></li>
-                          <li><a href="index.php?pag=calculos_sucessoes"><i class="fa fa-angle-right"></i>Sucessões</a></li>
-                          <li><a href="index.php?pag=calculos_familia"><i class="fa fa-angle-right"></i>Familia</a></li>
-                          <li><a href="index.php?pag=calculos_fazenda"><i class="fa fa-angle-right"></i>Fazenda</a></li>
-                          <li><a href="index.php?pag=calculos_criminais"><i class="fa fa-angle-right"></i>Criminais</a></li>
-                          <li><a href="index.php?pag=calculos_custas"><i class="fa fa-angle-right"></i>Custas</a></li>
+                          <li><a href="index.php?pag=varas_civeis"><i class="fa fa-angle-right"></i>Cíveis</a></li>
+                          <li><a href="index.php?pag=varas_sucessoes"><i class="fa fa-angle-right"></i>Sucessões</a></li>
+                          <li><a href="index.php?pag=varas_familia"><i class="fa fa-angle-right"></i>Familia</a></li>
+                          <li><a href="index.php?pag=varas_fazenda"><i class="fa fa-angle-right"></i>Fazenda</a></li>
+                          <li><a href="index.php?pag=varas_criminais"><i class="fa fa-angle-right"></i>Criminais</a></li>
+                          <li><a href="index.php?pag=custas"><i class="fa fa-angle-right"></i>Custas</a></li>
                           <li><a href="index.php?pag=adiciona_calculos"><i class="fa fa-angle-right"></i>Adicionar</a></li>
                       </ul>
                   </li>
+
+                  <li class="treeview">
+                    <a href="index.php?pag=meus_calculos">
+                        <i class="fa fa-calculator"></i> <span>Meus cálculos</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    
+              </li>
 
                   <li class="treeview">
                     <a href="#">

@@ -4,7 +4,7 @@
 require_once('verificar.php');
 require_once('../conexao.php');
 
-$pag = 'calculos_civeis';
+$pag = 'expurgos_inflacionarios';
 
 ?>
 
@@ -38,14 +38,35 @@ $pag = 'calculos_civeis';
       <tbody>
         <tr>
 
-            <td>
+            <td>       
 
                 <input type="text" class="form-control" id="processo" name="processo" placeholder="Número do processo">             
             </td>
 
             <td>
 
-                <input type="text" class="form-control" id="vara" name="vara" placeholder="Vara">             
+                <div class="form-group">
+                                <select class="form-control sel2" id="vara" name="vara" style="width:100%;" > 
+
+                                    <?php 
+                                    $query = $pdo->query("SELECT * FROM vara ORDER BY id asc");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    $total_reg = @count($res);
+                                    if($total_reg > 0){
+                                        for($i=0; $i < 30; $i++){
+                                        foreach ($res[$i] as $key => $value){}
+                                        echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nome'].'</option>';
+                                        }
+                                    }else{
+                                           // echo '<option value="0">Cadastre uma Categoria</option>';
+                                        }
+                                     ?>
+                                    
+
+                                </select>   
+                </div>  
+
+
             </td>
 
             <td>
@@ -149,12 +170,13 @@ $pag = 'calculos_civeis';
         <tr>
 
           <th class="text-left fonte-print" style="width:12%">DATA</th>
-          <th class="text-left fonte-print">HISTÓRICO</th>
-          <th class="text-left fonte-print" style="width:10%">VALOR (R$)</th>
-          <th class="text-left fonte-print" style="width:20%">CORREÇÃO MONETÁRIA</th>
-          <th class="text-left fonte-print" style="width:20%">JUROS DE MORA (Nº DIAS)</th>
-          <th class="text-left fonte-print" style="width:10%">TOTAL (R$)</th>
-          <th class="text-center no-print fonte-print" style="width:10%">AÇÃO</th>
+          <th class="text-left fonte-print" style="font-size: 16px;text-align: center">HISTÓRICO</th>
+          <th class="text-left fonte-print" style="width:10%; font-size: 16px; text-align: center">SALDO(Cz$) JAN/89</th>
+          <th class="text-left fonte-print" style="width:10%; font-size: 16px; text-align: center">DIFERENÇA DEVIDA(Cz$)</th>
+          <th class="text-left fonte-print" style="width:10%; font-size: 16px; text-align: center">CORREÇÃO MONETÁRIA</th>
+          <th class="text-left fonte-print" style="width:10%; font-size: 16px; text-align: center">JUROS DE MORA (Dias)</th>
+          <th class="text-left fonte-print" style="width:10%; font-size: 16px;text-align: center">TOTAL (R$)</th>
+          <th class="text-center no-print fonte-print" style="width:10%; font-size: 16px;text-align: center">AÇÃO</th>
 
       </tr>
   </thead>
@@ -178,17 +200,22 @@ $pag = 'calculos_civeis';
 
         <td>
 
-            <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor">             
+            <input type="text" class="form-control" id="saldo" name="saldo" placeholder="Valor">             
         </td>
 
         <td>
 
-            <input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção Monetária">             
+            <input type="text" class="form-control" id="diferenca" name="diferenca" placeholder="Diferença">             
         </td>
 
         <td>
 
-            <input type="text" class="form-control" id="juros" name="juros" placeholder="Juros Moratórios">             
+            <input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção">             
+        </td>
+
+        <td>
+
+            <input type="text" class="form-control" id="juros" name="juros" placeholder="Juros">             
         </td>
 
         <td>
@@ -414,6 +441,6 @@ $pag = 'calculos_civeis';
 
 <script src = "js/ajax2.js"></script>
 
-<script src = "js/calculosciveis.js"></script>
+<script src = "js/expurgos_inflacionarios.js"></script>
 
 <script> /* $(document).ready(function(){$("#dataevento").mask("99/99/9999");});*/</script>

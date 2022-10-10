@@ -1,3 +1,520 @@
+<?php 
+
+@session_start();
+require_once('verificar.php');
+require_once('../conexao.php');
+
+$pag = 'danos_materiais_morais';
+
+?>
+
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="css/relatorio.css">
+
+<!--**********************Ínicio form principal******************************-->
+
+<!--**********************Tabela dados do processo***************************-->
+<div style="display: flex; justify-content: center; margin-bottom:1.0em;"> <img src="../img/tjpe.png"> </div>
+<h3 style="text-align:center">TRIBUNAL DE JUSTIÇA DE PERNAMBUCO</h3>     
+
+<h4 style="text-align:center">CONTADORIA</h4>
+<h5 style="text-align:center; margin-bottom: 3.0em;">FORUM DES. RODOLFO AURELIANO - AV. DES. GUERRA BARRETO, S/N - ILHA DO LEITE - RECIFE /PE</h5>                
+
+<form method="post" id="formCiveis">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th class="text-left fonte-print" style="width:15%">NÚMERO DO PROCESSO </th>
+              <th class="text-left fonte-print" style="width:15%">VARA</th>          
+              <th class="text-left fonte-print" style="width:10%">EXEQUENTE</th>
+              <th class="text-left fonte-print" style="width:10%">EXECUTADO</th>        
+
+
+          </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+
+            <td>       
+
+                <input type="text" class="form-control" id="processo" name="processo" placeholder="Número do processo">             
+            </td>
+
+            <td>
+
+                <div class="form-group">
+                                <select class="form-control sel2" id="vara" name="vara" style="width:100%;" > 
+
+                                    <?php 
+                                    $query = $pdo->query("SELECT * FROM vara ORDER BY id asc");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    $total_reg = @count($res);
+                                    if($total_reg > 0){
+                                        for($i=0; $i < 30; $i++){
+                                        foreach ($res[$i] as $key => $value){}
+                                        echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nome'].'</option>';
+                                        }
+                                    }else{
+                                           // echo '<option value="0">Cadastre uma Categoria</option>';
+                                        }
+                                     ?>
+
+
+                                    
+
+                                </select>   
+                </div>  
+
+
+            </td>
+
+            <td>
+
+                <input type="text" class="form-control" id="exequente" name="exequente" placeholder="Exequente">             
+            </td>
+
+            <td>
+
+                <input type="text" class="form-control" id="executado" name="executado" placeholder="Executado">             
+            </td>
+
+
+        </tr>
+
+    </tbody>
+</table>
+
+<!--*********************Fim tabela dados do processo**********************-->
+
+<!--**********************Tabela correção+juros****************************-->
+
+<table class="table table-hover" >
+    <thead>
+        <tr>
+          <th class="text-left fonte-print">CORREÇÃO MONETÁRIA </th>     
+          <th class="text-left fonte-print" style="width: 17%;">TERMO FINAL</th>
+          <th class="text-left fonte-print" style="width: 25%;">JUROS DE MORA </th>
+          <th class="text-left fonte-print" style="width: 17%;">TERMO INICIAL</th>   
+          <th class="text-left fonte-print" style="width: 17%;">TERMO FINAL</th>               
+
+      </tr>
+  </thead>
+  
+  <tbody>             
+
+    <tr>
+
+        <td>
+
+
+             <div class="form-group">
+                                <select class="form-control sel2" id="selectindicecorrecao" name="selectindicecorrecao" style="width:100%;" > 
+
+                                    <?php 
+                                    $query = $pdo->query("SELECT * FROM indices_correcao ORDER BY id asc");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    $total_reg = @count($res);
+                                    if($total_reg > 0){
+                                        for($i=0; $i < $total_reg; $i++){
+                                        foreach ($res[$i] as $key => $value){}
+                                        echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nome'].'</option>';
+                                        }
+                                    }else{
+                                           // echo '<option value="0">Cadastre uma Categoria</option>';
+                                        }
+                                     ?>
+
+                                    
+
+                                </select>   
+                </div>  
+
+
+
+
+<!--
+
+           <form>
+
+             <select id="selectindicecorrecao" name="selectindicecorrecao" class="form-control">
+               <option value="Encoge">ENCOGE</option>
+               <option value="Igpm">IGPM</option>
+               <option value="Ipca">IPCA</option>
+               <option value="Poupança">POUPANÇA</option>
+               <option value="Tr">TR</option>          
+           </select>
+
+       </form>
+
+   -->
+
+   </td>
+
+   <td>
+
+    <input placeholder="Data final" type="text" id="datafinalcorrecao" name="datafinalcorrecao" class="form-control"></div>    
+
+</td>
+
+<td>
+
+    <div class="form-group">
+        <select class="form-control sel2" id="selecttipojuros" name="selecttipojuros" style="width:100%;" > 
+
+                                    <?php 
+                                    $query = $pdo->query("SELECT * FROM juros ORDER BY id asc");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    $total_reg = @count($res);
+                                    if($total_reg > 0){
+                                        for($i=0; $i < $total_reg; $i++){
+                                        foreach ($res[$i] as $key => $value){}
+                                        echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nome'].'</option>';
+                                        }
+                                    }else{
+                                           // echo '<option value="0">Cadastre uma Categoria</option>';
+                                        }
+                                     ?>
+                                
+                                </select>   
+                    </div>  
+
+
+    <!--
+
+    <form>
+
+     <select id="selecttipojuros" name="selecttipojuros" class="form-control">
+        <option value="jurossimplesconstante">1% am durante todo o período</option>
+        <option value="jurossimplesvariavel">0,5% am até 11/02/2003 e 1% am após</option>
+
+    </select>
+
+    </form>
+
+-->
+
+</td>
+
+<td>
+
+    <div>
+        <input placeholder="Data inicial" type="text" id="datainicialjuros" name="datainicialjuros" class="form-control"></div>
+
+    </td>
+
+    <td>
+
+        <div>
+            <input placeholder="Data final" type="text" id="datafinaljuros" name="datafinaljuros" class="form-control"></div>
+
+        </td>
+
+    </tr>
+
+</tbody>
+
+</table>
+
+<!--**********************Fim da tabela correção+juros**********************-->
+
+<!--*****************************Tabela parcelas****************************-->
+
+<table class="table table-hover" id="jonas">
+    <thead>
+        <tr>
+
+          <th class="text-left fonte-print" style="width:12%">DATA</th>
+          <th class="text-left fonte-print">HISTÓRICO</th>
+          <th class="text-left fonte-print" style="width:10%">VALOR (R$)</th>
+          <th class="text-left fonte-print" style="width:20%">CORREÇÃO MONETÁRIA</th>
+          <th class="text-left fonte-print" style="width:20%">JUROS DE MORA (Nº DIAS)</th>
+          <th class="text-left fonte-print" style="width:10%">TOTAL (R$)</th>
+          <th class="text-center no-print fonte-print" style="width:10%">AÇÃO</th>
+
+      </tr>
+  </thead>
+
+
+
+  <tbody id="modelo-linha">
+
+    <tr class="linha-lancamento">  
+
+        <td>
+
+            <input placeholder="Data" type="text" id="dataevento" name="dataevento" class="form-control">
+
+        </td>
+
+        <td>
+
+            <input type="text" class="form-control" id="historico" name="historico" placeholder="Histórico">             
+        </td>
+
+        <td>
+
+            <input type="text" class="form-control" id="valor" name="valor" placeholder="Valor">             
+        </td>
+
+        <td>
+
+            <input type="text" class="form-control" id="indicecorrecao" name="indicecorrecao" placeholder="Correção Monetária">             
+        </td>
+
+        <td>
+
+            <input type="text" class="form-control" id="juros" name="juros" placeholder="Juros Moratórios">             
+        </td>
+
+        <td>
+
+            <!------------------Problema no banco corrigir no do ID--------->
+
+            <input type="text" class="form-control" id="total" name="total" placeholder="Total">             
+        </td>
+
+        <td>
+
+            <div class="btn-group btn-group-sm no-print">
+                <button type="button" form="formCiveis" id="inserirLinha" name="inserirLinha"><i class="fa fa-plus" aria-hidden="true" title="Inserir linha"></i></button>
+            </div>
+
+            <div class="btn-group btn-group-sm no-print">
+                <button type="button" form="formCiveis" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
+            </div>
+
+            <div class="btn-group btn-group-sm no-print">
+                <button type="button" form="formCiveis" id="removerLinha" ><i class="fa fa-minus" aria-hidden="true" title="Remover linha"></i></button>
+            </div>
+            <div class="btn-group btn-group-sm no-print">
+                <button type="submit" id="salvarLinha" class="salvarLinha"><i class="fa fa-save" title="Salvar linha"></i></button>
+            </div>
+
+        </td>            
+
+    </tbody>
+
+</table>
+
+<!--**********************Fim tabela parcelas****************************-->
+
+<!--<div align="right"><h4 id="exibir" style="margin-bottom: 1.0em; margin-right: 18em;color: red;font-weight: bold;"><h4></div>-->
+
+
+<div align="right" class="margin-print" style="margin-right:9.3em ;">
+<!--
+    <label for="exibir" style="margin-bottom: 1.0em; margin-right:20.4em;color: red;font-weight: bold; width:14%"> SUBTOTAL:</label>
+
+    <input id="exibir" class = "form-control" style="margin-bottom: 1.0em; margin-right:12.3em;color: red;font-weight: bold; width:14%">
+-->
+
+<form class="form-inline">
+    <div class="form-group">
+      <label for="exibir">SUBTOTAL(R$):</label>
+      <input type="text" style="color: red;font-weight: bold; font-size: 16px;"  id="exibir" placeholder="" name="exibir" disabled>
+  </div>    
+</form>
+
+</div>
+
+
+<!--**************************Honorários*****************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold" class="fonte-print">HONORÁRIOS SUCUMBENCIAIS:</h5>
+    <select id="honorarios" name="honorarios" onclick="honorarios()" class="form-control" style="margin-left:0.50em">
+        <option selected>Escolha</option>
+
+        <option value="condenacao">Sobre o valor da condenação</option>
+        <option value="causa">Sobre o valor da causa</option>
+        <option value="valor">Valor determinado</option>
+        <option value="semhonorarios">Sem honorários</option>
+
+    </select>
+
+    <input type="text" placeholder="Histórico" id="historicocondenacao" class="form-control">
+    <input type="text" placeholder="Percentual (%)" id="percentualcondenacao" class="form-control">
+
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausa" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicocausa" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor da Causa" id="valorcausa" class="form-control" style="width:8%">
+    <input type="text" placeholder="Percentual(%)" id="percentualcausa" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorarioscausa" class="form-control" style="width:15%">
+    
+    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalor" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicovalor" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor determinado" id="valordeterminado" class="form-control" style="width:8%">
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaohonorariosvalor" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Total" id="honorariostotalcondenacao" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="honorariostotalcausa" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="honorariostotaldeterminado" class="form-control" style="width:8%">
+
+    
+</form>
+
+<!--***********************Fim do form****************************--> 
+
+
+<!--***********************Custas*************************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em;" class="fonte-print">CUSTAS PROCESSUAIS:</h5>
+    <select id="custas" name="custas" onclick="custas()" class="form-control" style="margin-left:0.50em">
+        <option selected>Escolha</option>
+
+        <option value="custasiniciais">Iniciais</option>
+        <option value="custascomplementar">Complementares</option>
+        <option value="custascumprimento">Cumprimento de sentença</option>
+        <option value="custasapelacao">Apelação</option>
+        <option value="custasoutros">Outros</option>
+        <option value="semcustas">Sem custas</option>
+
+    </select>
+
+    <input type="text" placeholder="Data" id="custasdata" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="custashistorico" class="form-control" style="width:20%">    
+    <input type="text" placeholder="Valor" id="custasvalor" class="form-control"style="width:8%">    
+    <input type="text" placeholder="Índice correção" id="indicecorrecaocustas" class="form-control" style="width:15%">
+    <input type="text" placeholder="Custas atualizadas" id="custasatualizadas" class="form-control" style="width:8%">    
+
+</form>
+
+<!--******************Fim do form******************************-->
+
+<!--*******************Honorários+Art.523*****************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold; margin-top:2.0em;" class="fonte-print">HONORÁRIOS + MULTA ART. 523</h5>
+    <select id="honorariosmultaart523" name="honorariosmultaart523" onclick="honorariosmulta()" class="form-control" style="margin-left:0.50em">
+        <option selected>Escolha</option>
+
+        <option value="honorariosmultaart523">Honorários + Multa Art. 523</option>
+        <option value="semhonorariosmulta">Sem honorários+multa art. 523</option>          
+
+    </select>
+
+    <input type="text" placeholder="Histórico" id="historicoart523" class="form-control" style="width:20%">
+    <input type="text" placeholder="Percentual (%)" id="percentualart523" class="form-control" style="width:8%" >
+    <input type="text" placeholder="Total" id="totalart523" class="form-control" style="width:8%">
+    
+</form>
+
+<!--**************************Fim do form************************************-->
+
+<!--**************************Multas*****************************-->
+
+<form class="form-inline">
+    <h5 style="font-family:arial;margin-bottom:0.67em; margin-left:0.50em; font-weight:bold;margin-top:2.0em" class="fonte-print">MULTAS:</h5>
+    
+    <select id="multas" name="multas" onclick="multas()" class="form-control" style="margin-left:0.50em">
+
+        <option selected>Escolha</option>
+        <option value="multacondenacao">Sobre o valor da condenação</option>
+        <option value="multacausa">Sobre o valor da causa</option>
+        <option value="multavalor">Valor determinado</option>
+        <option value="multadiaria">Diária</option>
+        <option value="semmulta">Sem multas</option>
+
+    </select>
+
+    <input type="text" placeholder="Histórico" id="historicocondenacaomulta" name="historicocondenacaomulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Percentual (%)" id="percentualcondenacaomulta" name="percentualcondenacaomulta" class="form-control" style="width:8%">
+
+    <input type="text" placeholder="Data da distribuição" id="datadistribuicaocausamulta" name="datadistribuicaocausamulta" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicocausamulta" name="historicocausamulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor da Causa" id="valorcausamulta" name="valorcausamulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Percentual(%)" id="percentualcausamulta" name="percentualcausamulta" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice de correcao multa" id="indicedecorrecaocausamulta" name="indicedecorrecaocausamulta" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Data da determinação" id="datadistribuicaovalormulta" name="datadistribuicaovalormulta" class="form-control" style="width:12%">
+    <input type="text" placeholder="Histórico" id="historicovalormulta" name="historicovalormulta" class="form-control" style="width:20%">
+    <input type="text" placeholder="Valor determinado" id="valordeterminadomulta" name="valordeterminadomulta" class="form-control" style="width:8%">   
+    <input type="text" placeholder="Índice de correcao" id="indicedecorrecaovalormulta" id="indicedecorrecaovalormulta" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Data de início" id="datainiciomultadiaria" name="datainiciomultadiaria" class="form-control" style="width:12%">
+    <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control" style="width:8%"> 
+    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:15%">
+    <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" style="width:8%" >
+    <input type="text" placeholder="Valor limite" id="valorlimitemulta" name="valorlimitemulta" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Índice correção" id="indicecorrecaomultadiaria" name="indicecorrecaomultadiaria" class="form-control" style="width:15%">
+
+    <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultacausa"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultadeterminado"  name="totalmulta" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultadiaria"  name="totalmulta" class="form-control" style="width:8%">
+    
+</form>
+
+<div align="center" style="margin-top:2.0em; margin-bottom:2.0em ;">
+<!--
+    <label for="exibir" style="margin-bottom: 1.0em; margin-right:20.4em;color: red;font-weight: bold; width:14%"> SUBTOTAL:</label>
+
+    <input id="exibir" class = "form-control" style="margin-bottom: 1.0em; margin-right:12.3em;color: red;font-weight: bold; width:14%">
+-->
+
+<form class="form-inline">
+    <div class="form-group">
+      <label for="exibirtotaldevido">VALOR TOTAL DEVIDO(R$):</label>
+      <input type="text" style="color: red;font-weight: bold; font-size: 16px;" class="form-control" id="exibirtotaldevido" placeholder="" name="exibirtotaldevido" disabled>
+  </div>    
+</form>
+
+</div>
+
+<!--*************************Fim do form**********************************--> 
+
+
+<input type="hidden" name = "id">
+
+<small><div id="mensagem" align="center"></div></small>               
+
+<div class="modal-footer">
+
+    <!--<button type="submit" id="salvar" class="btn btn-primary">Salvar</button>-->
+    <button onclick="window.print()" id="gerarrelatorio" class="btn btn-primary no-print">Gerar Relatório</button>
+
+    <!--<a href="../rel/relatorio.php"> Relatório </a>-->
+
+
+
+</div>
+
+</form>
+
+<!--****************************Fim do form principal***********************-->
+
+
+<!--****************************Scripts*************************************-->
+
+<?php 
+
+$query = $pdo->query("SELECT encoge, DATE_FORMAT(data,'%m-%Y') AS nicedata FROM indice_encoge");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_reg = @count($res);
+
+$indice = array();
+
+if($total_reg > 0){
+
+    for($i=0; $i<$total_reg; $i++){
+        foreach ($res[$i] as $key => $value){
+
+        $data = $res[$i]['nicedata'];
+        $encoge = $res[$i]['encoge'];
+        $indice[$data] = $encoge;
+        }
+    }
+}
+
+?>
+
+
+<script type="text/javascript">
+    
 $(document).ready(function(){
 
 /*******************************inicio******************************/
@@ -6,7 +523,7 @@ $(document).ready(function(){
 
 //inclusão de datapickers nos eventos de datas
 
-$("#datainicialjuros,#datafinaljuros,#datafinalcorrecao,#dataevento,#datadistribuicaocausa,#datadistribuicaovalor,#custasdata,#datadistribuicaovalormulta,#datainiciomultadiaria,#datafinalmultadiaria,#datadistribuicaocausamulta").datepicker({
+$("#datainicialjuros,#datafinaljuros,#datainiciomultadiaria,#datafinalmultadiaria").datepicker({
     changeMonth: true,
     changeYear: true,
     firstDay: 1,
@@ -18,64 +535,51 @@ $("#datainicialjuros,#datafinaljuros,#datafinalcorrecao,#dataevento,#datadistrib
     monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
 })
 
+$("#datafinalcorrecao,#dataevento,#datadistribuicaocausa,#datadistribuicaovalor,#custasdata,#datadistribuicaovalormulta,#datadistribuicaocausamulta ").datepicker({
+    changeMonth: true,
+    changeYear: true,
+    firstDay: 1,
+    dateFormat: 'mm-yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+})
+
 //define campos de somente leitura
 
 $('#indicecorrecao').prop('readonly',true);
 $('#juros').prop('readonly', true);    
-$('#total').prop('readonly', true);
+$('#total').prop('readonly', true);   
 
 //fim definição de campos somente leitura
 
+var jsonJS = <?php echo json_encode($indice)?>
+
 //função que calcula o índice de correção e define o valor da parcela com a mudança da data final
 
-$('#datafinalcorrecao').change(function(){
+$('#datafinalcorrecao').change(function(){   
 
-    const encoge = new Map([
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#dataevento').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-        ]);
-
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var resultStart = encoge.get(start)
-    var resultEnd = encoge.get(end)
-    var result = (encoge.get(start)/encoge.get(end))      
-    $('#indicecorrecao').val(result.toFixed(7));
-
-    var juros = $('#juros').val()*0.01/30
-    var indice = $('#indicecorrecao').val()
-    var valor = parseFloat($('#valor').val())
-    var totallinha = indice*(1+juros)*valor
-    $('#total').val(totallinha.toFixed(2))
-    var soma = $('#total').val()
+$('#indicecorrecao').val(result.toFixed(7));
+var juros = $('#juros').val()*0.01/30
+var indice = $('#indicecorrecao').val()
+var valor = parseFloat($('#valor').val())
+var totallinha = indice*(1+juros)*valor
+$('#total').val(totallinha.toFixed(2))
+var soma = $('#total').val()
 
 
 })
 
 //fim da função que calcula o índice de correção
-
-
 
 //define o formato das datas do datapicker
 
@@ -134,37 +638,16 @@ $('#datafinaljuros').change(function() {
 
 $('#dataevento').change(function(){
 
-    const encoge = new Map([
+    
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#dataevento').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-        ]);
 
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#dataevento').datepicker({dateFormat: 'dd-MM-yyyy'}).val()        
-    var resultStart = encoge.get(start)
-    var resultEnd = encoge.get(end)
-    var result = (encoge.get(start)/encoge.get(end))          
+
     $('#indicecorrecao').val(result.toFixed(7));
 
     var juros = $('#juros').val()*0.01/30
@@ -182,37 +665,18 @@ $('#dataevento').change(function(){
 
 $('#datadistribuicaocausa').change(function(){
 
-    const encoge = new Map([
+    
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#datadistribuicaocausa').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-        ]);
 
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#datadistribuicaocausa').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var resultStart = encoge.get(start)
-    var resultEnd = encoge.get(end)
-    var result = (encoge.get(start)/encoge.get(end))      
+
+
+
     $('#indicedecorrecaohonorarioscausa').val(result.toFixed(7));
 
     calculahonorarioscausa()      
@@ -225,37 +689,16 @@ $('#datadistribuicaocausa').change(function(){
 
 $('#datadistribuicaovalor').change(function(){
 
-    const encoge = new Map([
+    
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#datadistribuicaovalor').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-        ]);
 
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#datadistribuicaovalor').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var resultStart = encoge.get(start)
-    var resultEnd = encoge.get(end)
-    var result = (encoge.get(start)/encoge.get(end))      
+
     $('#indicedecorrecaohonorariosvalor').val(result.toFixed(7));
 
     calculahonorariosdeterminado()      
@@ -267,37 +710,16 @@ $('#datadistribuicaovalor').change(function(){
 
 $('#custasdata').change(function(){
 
-    const encoge = new Map([
+    
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
 
-        ]);
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#custasdata').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var start = $('#custasdata').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    var resultStart = encoge.get(start)
-    var resultEnd = encoge.get(end)
-    var result = (encoge.get(start)/encoge.get(end))      
+
     $('#indicecorrecaocustas').val(result.toFixed(7))
 
     calculacustas()      
@@ -309,43 +731,15 @@ $('#custasdata').change(function(){
 
 $('#datadistribuicaocausamulta').change(function(){
 
-    const encoge = new Map([
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
 
-        ]);
-
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#datadistribuicaocausamulta').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
     
-    var start = $('#datadistribuicaocausamulta').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    
-    var resultStart = encoge.get(start)
-    
-    var resultEnd = encoge.get(end)
-
-    var result = (encoge.get(start)/encoge.get(end))
-    
-    $('#indicedecorrecaocausamulta').val(result.toFixed(7))
+$('#indicedecorrecaocausamulta').val(result.toFixed(7))
     
     calculamultacausa()     
 
@@ -356,41 +750,13 @@ $('#datadistribuicaocausamulta').change(function(){
 
 $('#datadistribuicaovalormulta').change(function(){
 
-    const encoge = new Map([
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
 
-        ]);
-
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    
-    var start = $('#datadistribuicaovalormulta').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-    
-    var resultStart = encoge.get(start)
-    
-    var resultEnd = encoge.get(end)
-
-    var result = (encoge.get(start)/encoge.get(end))
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#datadistribuicaovalormulta').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
     
     $('#indicedecorrecaovalormulta').val(result.toFixed(7))
     
@@ -452,7 +818,7 @@ $('#valor').change(function() {
     changeMonth: true,
     changeYear: true,
     firstDay: 1,
-    dateFormat: 'dd-mm-yy',
+    dateFormat: 'mm-yy',
     dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
     dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
     dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -530,38 +896,15 @@ $('#dataevento'+count).change(function(){
 
     while(count>=2){
 
-        const encoge = new Map([
 
-            ['01-01-2021','1.1528566'],
-            ['01-02-2021','1.1497523'],
-            ['01-03-2021','1.1404010'],
-            ['01-04-2021','1.1306772'],
-            ['01-05-2021','1.1263969'],
-            ['01-06-2021','1.1156863'],
-            ['01-07-2021','1.1090321'],
-            ['01-08-2021','1.0978342'],
-            ['01-09-2021','1.0882575'],
-            ['01-10-2021','1.0753533'],
-            ['01-11-2021','1.0630222'],
-            ['01-12-2021','1.0541672'],
-            ['01-01-2022','1.0465270'],
-            ['01-02-2022','1.0395625'],
-            ['01-03-2022','1.0292698'],
-            ['01-04-2022','1.0119652'],
-            ['01-05-2022','1.0015491'],
-            ['01-06-2022','0.9970623'],
-            ['01-07-2022','0.9909186'],
-            ['01-08-2022','0.9969000'],
-            ['01-09-2022','1.0000000']         
 
-            ]);
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+var start = $('#dataevento'+count).datepicker({dateFormat: 'yyyy-mm-dd'}).val()
 
-        var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
+var valor1 = parseFloat(jsonJS[end])
+var valor2 = parseFloat(jsonJS[start])
+var result = (valor2/valor1);
 
-        var start = $('#dataevento'+count).datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-        var resultStart = encoge.get(start)
-        var resultEnd = encoge.get(end)
-        var result = (encoge.get(start)/encoge.get(end))          
         $('#indicecorrecao'+count).val(result.toFixed(7));
 
         var juros = $('#juros'+count).val()*0.01/30
@@ -588,42 +931,19 @@ $('#dataevento'+count).change(function(){
 
 $('#datafinalcorrecao').change(function(){
 
-    const encoge = new Map([
 
-        ['01-01-2021','1.1528566'],
-        ['01-02-2021','1.1497523'],
-        ['01-03-2021','1.1404010'],
-        ['01-04-2021','1.1306772'],
-        ['01-05-2021','1.1263969'],
-        ['01-06-2021','1.1156863'],
-        ['01-07-2021','1.1090321'],
-        ['01-08-2021','1.0978342'],
-        ['01-09-2021','1.0882575'],
-        ['01-10-2021','1.0753533'],
-        ['01-11-2021','1.0630222'],
-        ['01-12-2021','1.0541672'],
-        ['01-01-2022','1.0465270'],
-        ['01-02-2022','1.0395625'],
-        ['01-03-2022','1.0292698'],
-        ['01-04-2022','1.0119652'],
-        ['01-05-2022','1.0015491'],
-        ['01-06-2022','0.9970623'],
-        ['01-07-2022','0.9909186'],
-        ['01-08-2022','0.9969000'],
-        ['01-09-2022','1.0000000']         
 
-        ]);
-
-    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-
+var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    
     var count1 = count                 
 
     while(count>=2){    
 
-        var start = $('#dataevento'+count).datepicker({dateFormat: 'dd-MM-yyyy'}).val()
-        var resultStart = encoge.get(start)
-        var resultEnd = encoge.get(end)
-        var result = (encoge.get(start)/encoge.get(end))      
+        var start = $('#dataevento'+count).datepicker({dateFormat: 'dd-MM-yyyy'}).val()       
+        var valor1 = parseFloat(jsonJS[end])
+        var valor2 = parseFloat(jsonJS[start])
+        var result = (valor2/valor1);
+
         $('#indicecorrecao'+count).val(result.toFixed(7));
 
         var juros = $('#juros'+count).val()*0.01/30
@@ -1231,3 +1551,19 @@ function calculavalortotaldevido(){
 /***********************************************************************/
 
 
+
+
+
+
+
+
+</script>
+
+
+<script type="text/javascript"> var pag = "<?=$pag?>" </script>
+
+<script src = "js/ajax2.js"></script>
+
+<script src = ""></script>
+
+<script> /* $(document).ready(function(){$("#dataevento").mask("99/99/9999");});*/</script>
