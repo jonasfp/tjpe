@@ -1,4 +1,3 @@
-
 <?php 
 /*
 require_once('../../../conexao.php');
@@ -49,8 +48,7 @@ echo 'Salvo com Sucesso';
 
 require_once('../../../conexao.php');
 $tabelaprocesso = 'processo';
-$tabelaparametros = 'parametros_calculos_danos_materiais_morais';
-$tabelaparcelas = 'parcelas';
+
 /*$id=$_POST['id'];*/
 
 $processo=$_POST['processo'];
@@ -68,47 +66,6 @@ $query->bindValue(":executado","$executado");
 $query->execute();
 
 
-$indice_correcao_id=$_POST['selectindicecorrecao'];
-$datafinal_correcao=$_POST['datafinalcorrecao'];
-$datafinal_correcao_corrigida = "01-".$datafinal_correcao;
-$bddatafinal_correcao=date('Y-m-d', strtotime($datafinal_correcao_corrigida));
-$jurosid=$_POST['selecttipojuros'];
-$datainicial_juros=$_POST['datainicialjuros'];
-$bddatainicial_juros=date('Y-m-d', strtotime($datainicial_juros));
-$datafinal_juros=$_POST['datafinaljuros'];
-$bddatafinal_juros=date('Y-m-d', strtotime($datafinal_juros));
-
-$query = $pdo->prepare("INSERT INTO $tabelaparametros SET indice_correcao_id = :indice_correcao_id, datafinal_correcao = :datafinal_correcao, jurosid = :jurosid, datainicial_juros = :datainicial_juros, datafinal_juros = :datafinal_juros");
-
-$query->bindValue(":indice_correcao_id","$indice_correcao_id");
-$query->bindValue(":datafinal_correcao","$bddatafinal_correcao");
-$query->bindValue(":jurosid","$jurosid");
-$query->bindValue(":datainicial_juros","$bddatainicial_juros");
-$query->bindValue(":datafinal_juros","$bddatafinal_juros");
-
-$query->execute();
-
-
-$dataevento=$_POST['dataevento'];
-$dataevento_corrigida="01-".$dataevento;
-$bddataevento=date('Y-m-d', strtotime($dataevento_corrigida));
-$historico=$_POST['historico'];
-$valor=$_POST['valor'];
-$indice_correcao_id=$_POST['indicecorrecao'];
-$numero_dias=$_POST['juros'];
-$total_parcela=$_POST['total'];
-
-
-$query = $pdo->prepare("INSERT INTO $tabelaparcelas SET dataevento = :dataevento, historico = :historico, valor = :valor, indice_correcao_id = :indice_correcao_id, numero_dias = :numero_dias, total_parcela = :total_parcela");
-
-
-$query->bindValue(":dataevento","$bddataevento");
-$query->bindValue(":historico","$historico");
-$query->bindValue(":valor","$valor");
-$query->bindValue(":indice_correcao_id","$indice_correcao_id");
-$query->bindValue(":numero_dias","$numero_dias");
-$query->bindValue(":total_parcela","$total_parcela");
-$query->execute();
 
 echo 'Salvo com Sucesso';
 
@@ -117,4 +74,3 @@ echo 'Salvo com Sucesso';
 
 
  ?>
-

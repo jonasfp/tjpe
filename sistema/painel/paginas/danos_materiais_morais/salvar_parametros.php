@@ -1,4 +1,3 @@
-
 <?php 
 /*
 require_once('../../../conexao.php');
@@ -48,24 +47,9 @@ echo 'Salvo com Sucesso';
 */
 
 require_once('../../../conexao.php');
-$tabelaprocesso = 'processo';
+
 $tabelaparametros = 'parametros_calculos_danos_materiais_morais';
-$tabelaparcelas = 'parcelas';
 /*$id=$_POST['id'];*/
-
-$processo=$_POST['processo'];
-$varaid=$_POST['vara'];
-$exequente=$_POST['exequente'];
-$executado=$_POST['executado'];
-
-$query = $pdo->prepare("INSERT INTO $tabelaprocesso SET processo = :processo, varaid = :varaid, exequente = :exequente, executado = :executado");
-
-$query->bindValue(":processo","$processo");
-$query->bindValue(":varaid","$varaid");
-$query->bindValue(":exequente","$exequente");
-$query->bindValue(":executado","$executado");
-
-$query->execute();
 
 
 $indice_correcao_id=$_POST['selectindicecorrecao'];
@@ -89,27 +73,6 @@ $query->bindValue(":datafinal_juros","$bddatafinal_juros");
 $query->execute();
 
 
-$dataevento=$_POST['dataevento'];
-$dataevento_corrigida="01-".$dataevento;
-$bddataevento=date('Y-m-d', strtotime($dataevento_corrigida));
-$historico=$_POST['historico'];
-$valor=$_POST['valor'];
-$indice_correcao_id=$_POST['indicecorrecao'];
-$numero_dias=$_POST['juros'];
-$total_parcela=$_POST['total'];
-
-
-$query = $pdo->prepare("INSERT INTO $tabelaparcelas SET dataevento = :dataevento, historico = :historico, valor = :valor, indice_correcao_id = :indice_correcao_id, numero_dias = :numero_dias, total_parcela = :total_parcela");
-
-
-$query->bindValue(":dataevento","$bddataevento");
-$query->bindValue(":historico","$historico");
-$query->bindValue(":valor","$valor");
-$query->bindValue(":indice_correcao_id","$indice_correcao_id");
-$query->bindValue(":numero_dias","$numero_dias");
-$query->bindValue(":total_parcela","$total_parcela");
-$query->execute();
-
 echo 'Salvo com Sucesso';
 
 
@@ -117,4 +80,3 @@ echo 'Salvo com Sucesso';
 
 
  ?>
-

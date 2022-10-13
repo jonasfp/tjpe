@@ -1,4 +1,3 @@
-
 <?php 
 /*
 require_once('../../../conexao.php');
@@ -48,45 +47,10 @@ echo 'Salvo com Sucesso';
 */
 
 require_once('../../../conexao.php');
-$tabelaprocesso = 'processo';
-$tabelaparametros = 'parametros_calculos_danos_materiais_morais';
+
 $tabelaparcelas = 'parcelas';
 /*$id=$_POST['id'];*/
 
-$processo=$_POST['processo'];
-$varaid=$_POST['vara'];
-$exequente=$_POST['exequente'];
-$executado=$_POST['executado'];
-
-$query = $pdo->prepare("INSERT INTO $tabelaprocesso SET processo = :processo, varaid = :varaid, exequente = :exequente, executado = :executado");
-
-$query->bindValue(":processo","$processo");
-$query->bindValue(":varaid","$varaid");
-$query->bindValue(":exequente","$exequente");
-$query->bindValue(":executado","$executado");
-
-$query->execute();
-
-
-$indice_correcao_id=$_POST['selectindicecorrecao'];
-$datafinal_correcao=$_POST['datafinalcorrecao'];
-$datafinal_correcao_corrigida = "01-".$datafinal_correcao;
-$bddatafinal_correcao=date('Y-m-d', strtotime($datafinal_correcao_corrigida));
-$jurosid=$_POST['selecttipojuros'];
-$datainicial_juros=$_POST['datainicialjuros'];
-$bddatainicial_juros=date('Y-m-d', strtotime($datainicial_juros));
-$datafinal_juros=$_POST['datafinaljuros'];
-$bddatafinal_juros=date('Y-m-d', strtotime($datafinal_juros));
-
-$query = $pdo->prepare("INSERT INTO $tabelaparametros SET indice_correcao_id = :indice_correcao_id, datafinal_correcao = :datafinal_correcao, jurosid = :jurosid, datainicial_juros = :datainicial_juros, datafinal_juros = :datafinal_juros");
-
-$query->bindValue(":indice_correcao_id","$indice_correcao_id");
-$query->bindValue(":datafinal_correcao","$bddatafinal_correcao");
-$query->bindValue(":jurosid","$jurosid");
-$query->bindValue(":datainicial_juros","$bddatainicial_juros");
-$query->bindValue(":datafinal_juros","$bddatafinal_juros");
-
-$query->execute();
 
 
 $dataevento=$_POST['dataevento'];
@@ -117,4 +81,3 @@ echo 'Salvo com Sucesso';
 
 
  ?>
-
