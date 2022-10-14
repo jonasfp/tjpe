@@ -602,19 +602,21 @@ $pag = 'danos_materiais_morais';
 
     <div class="form-inline" style="margin-top:12px;">
 
-    <input type="text" placeholder="Data de início" id="datainiciomultadiaria" name="datainiciomultadiaria" class="form-control" style="width:12%">
-    
-    <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control" style="width:12%"> 
-    
-    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:31.5%">
-    
+    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:39.3%">
+
     <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" style="width:9%" >
+
+    <input type="text" placeholder="Valor limite" id="valormultalimite" name="valormultalimite" class="form-control" style="width:9%">
+
     
-    <input type="text" placeholder="Valor limite" id="valorlimitemulta" name="valorlimitemulta" class="form-control" style="width:9%">    
+    <input type="text" placeholder="Data de início" id="datainiciomultadiaria" name="datainiciomultadiaria" class="form-control" style="width:10%">
     
-    <input type="text" placeholder="Índice correção" id="indicecorrecaomultadiaria" name="indicecorrecaomultadiaria" class="form-control" style="width:10%">
+    <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control" style="width:10%"> 
+         
+    <input type="text" placeholder="Nº dias" id="numerosdias" name="numerosdias" class="form-control" style="width:6%"> 
+
     
-    <input type="text" placeholder="Totaldiaria" id="totalmultadiaria"  name="totalmultadiaria" class="form-control" style="width:8%">
+    <input type="text" placeholder="Total" id="totalmultadiaria"  name="totalmultadiaria" class="form-control" style="width:8%">
 
     <button id="salvarlinhamultadiaria" name="salvarlinhamultadiaria" class="btn btn-primary no-print">Salvar</button>
 
@@ -807,6 +809,107 @@ $('#datafinaljuros').change(function() {
         $('#juros').val("");
     }
 })
+
+
+/*****************************************************************/
+
+$( "#datainiciomultadiaria").datepicker({ dateFormat: 'dd-mm-yy' });
+$( "#datafinalmultadiaria").datepicker({ dateFormat: 'dd-mm-yy' });
+
+$('#datainiciomultadiaria').change(function() {
+
+    var start = $('#datainiciomultadiaria').datepicker('getDate');
+    var end   = $('#datafinalmultadiaria').datepicker('getDate');
+
+    if (start<end) {
+        var numerosdias   = (end - start)/1000/60/60/24;    
+        $('#numerosdias').val(numerosdias);
+        var numerosdias = $('#numerosdias').val();        
+        var valor = parseFloat($('#valormultadiaria').val());
+        var total = numerosdias*valor;
+        var valorlimite = parseFloat($('#valormultalimite').val());
+        if(total>=valorlimite){
+           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
+       } else{
+
+        $('#totalmultadiaria').val(total.toFixed(2))
+
+       }      
+        
+        var soma = $('#totalmultadiaria').val()
+
+    }
+})
+
+
+//função que define o número de dias para o cálculo dos juros e calcula o valor total da parcela com a mudança da data final dos juros
+
+$('#datafinalmultadiaria').change(function() {
+
+    var start = $('#datainiciomultadiaria').datepicker('getDate');
+    var end   = $('#datafinalmultadiaria').datepicker('getDate');
+
+    if (start<end) {
+        var numerosdias   = (end - start)/1000/60/60/24;    
+        $('#numerosdias').val(numerosdias);
+        var numerosdias = $('#numerosdias').val();        
+        var valor = parseFloat($('#valormultadiaria').val());
+        var total = numerosdias*valor;
+        var valorlimite = parseFloat($('#valormultalimite').val());
+        if(total>=valorlimite){
+           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
+       } else{
+
+        $('#totalmultadiaria').val(total.toFixed(2))
+
+       }      
+        
+        var soma = $('#totalmultadiaria').val()
+
+    }
+})
+
+$('#valormultadiaria').change(function() {
+
+    var numerosdias = $('#numerosdias').val();        
+        var valor = parseFloat($('#valormultadiaria').val());
+        var total = numerosdias*valor;
+        var valorlimite = parseFloat($('#valormultalimite').val());
+        if(total>=valorlimite){
+           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
+       } else{
+
+        $('#totalmultadiaria').val(total.toFixed(2))
+
+       }      
+        
+        var soma = $('#totalmultadiaria').val()
+           
+
+})
+
+$('#valormultalimite').change(function() {
+
+    var numerosdias = $('#numerosdias').val();        
+        var valor = parseFloat($('#valormultadiaria').val());
+        var total = numerosdias*valor;
+        var valorlimite = parseFloat($('#valormultalimite').val());
+        if(total>=valorlimite){
+           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
+       } else{
+
+        $('#totalmultadiaria').val(total.toFixed(2))
+
+       }      
+        
+        var soma = $('#totalmultadiaria').val()
+    
+
+})
+
+
+
+
 
 
 //função que calcula o valor total da parcela e o índice com sua mudança
@@ -1532,7 +1635,7 @@ function calculahonorariosmultaart523(){
 
 $('#indicedecorrecaovalormulta').prop('readonly',true);
 $('#indicedecorrecaocausamulta').prop('readonly', true);
-$('#indicecorrecaomultadiaria').prop('readonly', true);
+$('#numerosdias').prop('readonly', true);
 $('#totalmultacondenacao').prop('readonly', true);
 $('#totalmultacausa').prop('readonly', true);
 $('#totalmultadeterminado').prop('readonly', true);
@@ -1553,10 +1656,12 @@ $('#indicedecorrecaovalormulta').hide()
 
 $('#historicomultadiaria').hide()
 $('#valormultadiaria').hide()
-$('#valorlimitemulta').hide()
+$('#valormultalimite').hide()
 $('#datainiciomultadiaria').hide()
 $('#datafinalmultadiaria').hide()
-$('#indicecorrecaomultadiaria').hide()        
+$('#indicecorrecaomultadiaria').hide()
+$('#numerosdias').hide()
+       
 
 $('#totalmultacondenacao').hide()
 $('#totalmultacausa').hide()
@@ -1595,10 +1700,12 @@ $("#multas").click(function(){
 
        $('#historicomultadiaria').hide()
        $('#valormultadiaria').hide()
-       $('#valorlimitemulta').hide()
+       $('#valormultalimite').hide()
        $('#datainiciomultadiaria').hide()
        $('#datafinalmultadiaria').hide()
        $('#indicecorrecaomultadiaria').hide()
+       $('#numerosdias').hide()
+
 
        $('#salvarlinhamultacondenacao').hide()
         $('#salvarlinhamultadeterminado').hide()
@@ -1629,10 +1736,12 @@ $("#multas").click(function(){
 
        $('#historicomultadiaria').hide()
        $('#valormultadiaria').hide()
-       $('#valorlimitemulta').hide()
+       $('#valormultalimite').hide()
        $('#datainiciomultadiaria').hide()
        $('#datafinalmultadiaria').hide()
        $('#indicecorrecaomultadiaria').hide()
+       $('#numerosdias').hide()
+
 
        $('#salvarlinhamultacausa').hide()
         $('#salvarlinhamultadeterminado').hide()
@@ -1663,10 +1772,12 @@ $("#multas").click(function(){
 
        $('#historicomultadiaria').hide()
        $('#valormultadiaria').hide()
-       $('#valorlimitemulta').hide()
+       $('#valormultalimite').hide()
        $('#datainiciomultadiaria').hide()
        $('#datafinalmultadiaria').hide()
        $('#indicecorrecaomultadiaria').hide()
+       $('#numerosdias').hide()
+
 
        $('#salvarlinhamultacausa').hide()
         $('#salvarlinhamultacondenacao').hide()
@@ -1697,14 +1808,14 @@ $("#multas").click(function(){
 
        $('#historicomultadiaria').show()
        $('#valormultadiaria').show()
-       $('#valorlimitemulta').show()
+       $('#valormultalimite').show()
        $('#datainiciomultadiaria').show()
        $('#datafinalmultadiaria').show()
        $('#indicecorrecaomultadiaria').show()
        $('#totalmultadiaria').show()
        $('#atualizarlinhamulta').show()
        $('#salvarlinhamultadiaria').show()
-
+       $('#numerosdias').show()
 
        $('#salvarlinhamultacausa').hide()
         $('#salvarlinhamultadeterminado').hide()
@@ -1732,7 +1843,7 @@ else {
 
    $('#historicomultadiaria').hide()
    $('#valormultadiaria').hide()
-   $('#valorlimitemulta').hide()
+   $('#valormultalimite').hide()
    $('#datainiciomultadiaria').hide()
    $('#datafinalmultadiaria').hide()
    $('#indicecorrecaomultadiaria').hide()
@@ -1746,6 +1857,8 @@ else {
 $('#salvarlinhamultacausa').hide()
 $('#salvarlinhamultadeterminado').hide()
 $('#salvarlinhamultadiaria').hide()
+$('#numerosdias').hide()
+
    
 
 }

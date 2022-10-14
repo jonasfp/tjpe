@@ -382,7 +382,7 @@ $pag = 'calculos_civeis';
     <input type="text" placeholder="Data final" id="datafinalmultadiaria" name="datafinalmultadiaria" class="form-control" style="width:8%"> 
     <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:15%">
     <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" style="width:8%" >
-    <input type="text" placeholder="Valor limite" id="valorlimitemulta" name="valorlimitemulta" class="form-control" style="width:8%">    
+    <input type="text" placeholder="Valor limite" id="valormultalimite" name="valormultalimite" class="form-control" style="width:8%">    
     <input type="text" placeholder="Índice correção" id="indicecorrecaomultadiaria" name="indicecorrecaomultadiaria" class="form-control" style="width:15%">
 
     <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmulta" class="form-control" style="width:8%">
