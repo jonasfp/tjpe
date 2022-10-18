@@ -5,7 +5,8 @@ $(document).ready(function(){
 
 function listar(){
 	$.ajax({
-		url:'paginas/'+ pag + '/calculo_indice.php',
+		url:'paginas/'+ pag + '/calculos.php',
+        //url:'paginas/lista_usuario/calculos.php',
 		method:'POST',
 		data:$('#form').serialize(),
 		dataType:"html",

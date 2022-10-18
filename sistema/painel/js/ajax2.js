@@ -30,8 +30,10 @@ $("#formCiveisProcessos").submit(function () {
         contentType: false,
         processData: false,
 
-    });  
+    });
 
+$('.salvarLinhaProcesso').prop('disabled', true);
+$('.salvarLinhaProcesso').css("backgroundColor", "grey");
 
 
 });
@@ -66,8 +68,10 @@ $("#formCiveisParametros").submit(function () {
         contentType: false,
         processData: false,
 
-    });  
+    });
 
+$('.salvarLinhaParametros').prop('disabled', true);
+$('.salvarLinhaParametros').css("backgroundColor", "grey");
 
 
 });
@@ -104,7 +108,8 @@ $("#formCiveisParcelas").submit(function () {
 
     });  
 
-$('.salvarLinha').prop('disabled', true); 
+$('.salvarLinha').prop('disabled', true);
+$('.salvarLinha').css("backgroundColor", "grey");
 
 });
 

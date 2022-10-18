@@ -16,7 +16,32 @@ $pag = 'danos_materiais_morais';
 
 <!--**********************Tabela dados do processo***************************-->
 <div style="display: flex; justify-content: center; margin-bottom:1.0em;"> <img src="../img/tjpe.png"> </div>
-<h3 style="text-align:center">TRIBUNAL DE JUSTIÇA DE PERNAMBUCO</h3>     
+<h3 style="text-align:center">TRIBUNAL DE JUSTIÇA DE PERNAMBUCO</h3>
+
+<div>
+    
+<?php 
+
+
+$query = $pdo->query("DELETE FROM processo");
+$query = $pdo->query("DELETE FROM parcelas");
+$query = $pdo->query("DELETE FROM parametros_calculos_danos_materiais_morais");
+$query = $pdo->query("DELETE FROM multa_diaria");
+$query = $pdo->query("DELETE FROM multa_determinado");
+$query = $pdo->query("DELETE FROM multa_condenacao");
+$query = $pdo->query("DELETE FROM multa_causa");
+$query = $pdo->query("DELETE FROM honorarios_condenacao");
+$query = $pdo->query("DELETE FROM honorarios_multa");
+$query = $pdo->query("DELETE FROM honorarios_determinado");
+$query = $pdo->query("DELETE FROM honorarios_causa");
+$query = $pdo->query("DELETE FROM custas");
+
+
+
+?>
+
+
+</div>     
 
 <h4 style="text-align:center">CONTADORIA</h4>
 <h5 style="text-align:center; margin-bottom: 3.0em;">FORUM DES. RODOLFO AURELIANO - AV. DES. GUERRA BARRETO, S/N - ILHA DO LEITE - RECIFE /PE</h5>                
@@ -88,14 +113,14 @@ $pag = 'danos_materiais_morais';
             <td>
 
 
-                <div class="btn-group btn-group-sm no-print">
+                
                     <button type="button" form="formCiveis" id="atualizarLinha" name="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
-                </div>
+              
 
 
-                <div class="btn-group btn-group-sm no-print">
-                    <button type="submit" id="salvarLinhaProcesso" name="name" class="salvarLinhaProcesso"><i class="fa fa-save" title="Salvar linha"></i></button>
-                </div>
+               
+                    <button type="submit" id="salvarLinhaProcesso" name="salvarLinhaProcesso" class="salvarLinhaProcesso"><i class="fa fa-save" title="Salvar linha"></i></button>
+                
 
             </td>
 
@@ -142,7 +167,7 @@ $pag = 'danos_materiais_morais';
                 if($total_reg > 0){
                     for($i=0; $i < $total_reg; $i++){
                         foreach ($res[$i] as $key => $value){}
-                            echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nome'].'</option>';
+                            echo '<option value="'.$res[$i]['id'].'">'.$res[$i]['nomeindice'].'</option>';
                     }
                 }else{
                                            // echo '<option value="0">Cadastre uma Categoria</option>';
@@ -237,14 +262,13 @@ $pag = 'danos_materiais_morais';
         <td>
 
 
-            <div class="btn-group btn-group-sm no-print">
-                <button type="button" form="formCiveis" id="atualizarLinha" name="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
-            </div>
-
             
-            <div class="btn-group btn-group-sm no-print">
+                <button type="button" form="formCiveis" id="atualizarLinha" name="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
+            
+            
+            
                 <button type="submit" id="salvarLinhaParametros" name="salvarLinhaParametros" class="salvarLinhaParametros"><i class="fa fa-save" title="Salvar linha"></i></button>
-            </div>
+            
 
         </td>            
 
@@ -318,20 +342,21 @@ $pag = 'danos_materiais_morais';
 
             <td>
 
-                <div class="btn-group btn-group-sm no-print">
+                
                     <button type="button" form="formCiveis" id="inserirLinha" name="inserirLinha"><i class="fa fa-plus" aria-hidden="true" title="Inserir linha"></i></button>
-                </div>
+               
 
-                <div class="btn-group btn-group-sm no-print">
+               
                     <button type="button" form="formCiveis" id="atualizarLinha" name="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true" title="Atualizar linha"></i></button>    
-                </div>
+             
 
-                <div class="btn-group btn-group-sm no-print">
+               
                     <button type="button" form="formCiveis" id="removerLinha" name="removerLinha" ><i class="fa fa-minus" aria-hidden="true" title="Remover linha"></i></button>
-                </div>
-                <div class="btn-group btn-group-sm no-print">
-                    <button type="submit" id="salvarLinha" name="removerLinha" class="salvarLinha"><i class="fa fa-save" title="Salvar linha"></i></button>
-                </div>
+                
+                
+                    <button type="submit" id="salvarLinha" name="salvarLinha" class="salvarLinha"><i class="fa fa-save" title="Salvar linha"></i></button>
+               
+
 
             </td>            
 
@@ -383,7 +408,7 @@ $pag = 'danos_materiais_morais';
 
     <div class="form-inline" style="margin-top:12px;">
         
-        <input type="text" placeholder="Histórico" id="historicocondenacao" name="historicocondenacao" class="form-control" style="width:67%">
+        <input type="text" placeholder="Histórico" id="historicocondenacao" name="historicocondenacao" class="form-control" style="width:66%">
 
 
         <input type="text" placeholder="Percentual (%)" id="percentualcondenacao" name="percentualcondenacao" class="form-control" style="width:13%">
@@ -392,7 +417,10 @@ $pag = 'danos_materiais_morais';
         <input type="text" placeholder="Total" id="honorariostotalcondenacao" name="honorariostotalcondenacao" class="form-control" style="width:13%"> 
            
 
-        <button id="salvarlinhahonorarioscondenacao" name="salvarlinhahonorarioscondenacao" class="btn btn-primary no-print">Salvar</button>
+
+         <button type="submit" id="salvarhonorarioscondenacao" name="salvarhonorarioscondenacao" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+        <button type="submit" id="removerhonorarioscondenacao" name="removerhonorarioscondenacao" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>  
           
     </div>
 
@@ -409,7 +437,7 @@ $pag = 'danos_materiais_morais';
         <input type="text" placeholder="Data da causa" id="datadistribuicaocausa" name="datadistribuicaocausa" class="form-control" style="width:10%">
 
         
-        <input type="text" placeholder="Histórico" id="historicocausa" name="historicocausa" class="form-control" style="width:42%">
+        <input type="text" placeholder="Histórico" id="historicocausa" name="historicocausa" class="form-control" style="width:41%">
 
 
         
@@ -426,8 +454,10 @@ $pag = 'danos_materiais_morais';
 
         <input type="text" placeholder="Total" id="honorariostotalcausa" name="honorariostotalcausa" class="form-control " style="width:10%">
       
+        
+        <button type="submit" id="salvarhonorarioscausa" name="salvarhonorarioscausa" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
 
-        <button id="salvarlinhahonorarioscausa" name="salvarlinhahonorarioscausa" name="salvarlinhahonorarioscausa" class="btn btn-primary no-print">Salvar</button>
+        <button type="submit" id="removerhonorarioscausa" name="salvarhonorarioscausa" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>  
             
       
 
@@ -445,7 +475,7 @@ $pag = 'danos_materiais_morais';
     
     <input type="text" placeholder="Data da determinação" id="datadistribuicaovalor" name="datadistribuicaovalor" class="form-control" style="width:13%">
 
-    <input type="text" placeholder="Histórico" id="historicovalor" name="historicovalor" class="form-control" style="width:41.2%">
+    <input type="text" placeholder="Histórico" id="historicovalor" name="historicovalor" class="form-control" style="width:40.5%">
 
     <input type="text" placeholder="Valor determinado" id="valordeterminado" name="valordeterminado" class="form-control" style="width:15%">
 
@@ -453,7 +483,10 @@ $pag = 'danos_materiais_morais';
 
     <input type="text" placeholder="Total" id="honorariostotaldeterminado" name="honorariostotaldeterminado" class="form-control" style="width:8%">
 
-     <button id="salvarlinhahonorariosvalor" name="salvarlinhahonorariosvalor" class="btn btn-primary no-print">Salvar</button>
+     
+     <button type="submit" id="salvarhonorariosvalor" name="salvarhonorariosvalor" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removerhonorariosvalor" name="removerhonorariosvalor" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>  
     
 </div>
 
@@ -470,21 +503,21 @@ $pag = 'danos_materiais_morais';
 <form method="post" class="form-inline" id="formCiveisCustas">
 
     <h5 style="font-family:arial;margin-bottom:0.67em; font-weight:bold;margin-top:2.0em;" class="fonte-print">CUSTAS PROCESSUAIS:</h5>
-    <select id="custas" name="custas" onclick="custas()" class="form-control" >
+    <select id="custas" name="custas" class="form-control" >
         <option selected>Escolha</option>
 
-        <option value="custasiniciais">Iniciais</option>
-        <option value="custascomplementar">Complementares</option>
-        <option value="custascumprimento">Cumprimento de sentença</option>
-        <option value="custasapelacao">Apelação</option>
-        <option value="custasoutros">Outros</option>
+        <option value="Custas iniciais">Iniciais</option>
+        <option value="Custas complementares">Complementares</option>
+        <option value="Custas cumprimento">Cumprimento de sentença</option>
+        <option value="Custas apelação">Apelação</option>
+        <option value="Outros">Outros</option>
         <option value="semcustas">Sem custas</option>
 
     </select>
 
     <input type="text" placeholder="Data" id="custasdata" name="custasdata" class="form-control" style="width:12%">
    
-    <input type="text" placeholder="Histórico" id="custashistorico" name="custashistorico" class="form-control" style="width:33%">    
+    <input type="text" placeholder="Histórico" id="custashistorico" name="custashistorico" class="form-control" style="width:32.5%">    
     
     <input type="text" placeholder="Valor" id="custasvalor" name="custasvalor" class="form-control"style="width:8%">    
     
@@ -492,7 +525,10 @@ $pag = 'danos_materiais_morais';
     
     <input type="text" placeholder="Custas atualizadas" id="custasatualizadas" name="custasatualizadas" class="form-control" style="width:8%">
     
-    <button id="salvarlinhacustas" name="salvarlinhacustas" class="btn btn-primary no-print">Salvar</button>    
+    
+    <button type="submit" id="salvarcustas" name="salvarcustas" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removercustas" name="removercustas" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>    
 
 </form>
 
@@ -503,7 +539,7 @@ $pag = 'danos_materiais_morais';
 <form method="post" class="form-inline" id="formCiveisHonorariosMulta" name="formCiveisHonorariosMulta">
 
     <h5 style="font-family:arial;margin-bottom:0.67em; font-weight:bold; margin-top:2.0em;" class="fonte-print">HONORÁRIOS + MULTA ART. 523</h5>
-    <select id="honorariosmultaart523" name="honorariosmultaart523" onclick="honorariosmulta()" class="form-control">
+    <select id="honorariosmultaart523" name="honorariosmultaart523" class="form-control">
 
         <option selected>Escolha</option>
         <option value="honorariosmultaart523">Honorários + Multa Art. 523</option>
@@ -511,13 +547,16 @@ $pag = 'danos_materiais_morais';
 
     </select>
 
-    <input type="text" placeholder="Histórico" id="historicoart523" name="historicoart523" class="form-control" style="width:56.3%">
+    <input type="text" placeholder="Histórico" id="historicoart523" name="historicoart523" class="form-control" style="width:55.9%">
 
     <input type="text" placeholder="Percentual (%)" id="percentualart523" name="percentualart523" class="form-control" style="width:10%">
 
     <input type="text" placeholder="Total" id="totalart523" name="totalart523" class="form-control" style="width:8%">
     
-    <button id="salvarlinhamulta523" name="salvarlinhamulta523" class="btn btn-primary no-print">Salvar</button>
+    
+    <button type="submit" id="salvarmulta523" name="salvarmulta523" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removermulta523" name="removermulta523" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>
     
 </form>
 
@@ -527,7 +566,7 @@ $pag = 'danos_materiais_morais';
 
     <h5 style="font-family:arial;margin-bottom:0.67em;font-weight:bold;margin-top:2.0em" class="fonte-print">MULTAS:</h5>
     
-    <select id="multas" name="multas" onclick="multas()" class="form-control">
+    <select id="multas" name="multas" class="form-control">
 
         <option selected>Escolha</option>
         <option value="multacondenacao">Sobre o valor da condenação</option>
@@ -542,10 +581,14 @@ $pag = 'danos_materiais_morais';
 
     <div class="form-inline" style="margin-top:12px;">
 
-    <input type="text" placeholder="Histórico" id="historicocondenacaomulta" name="historicocondenacaomulta" class="form-control" style="width:67%">
+    <input type="text" placeholder="Histórico" id="historicocondenacaomulta" name="historicocondenacaomulta" class="form-control" style="width:66%">
     <input type="text" placeholder="Percentual (%)" id="percentualcondenacaomulta" name="percentualcondenacaomulta" class="form-control" style="width:13%">
-    <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmulta" class="form-control" style="width:13%">
-    <button id="salvarlinhamultacondenacao" name="salvarlinhamultacondenacao" class="btn btn-primary no-print">Salvar</button>
+    <input type="text" placeholder="Total" id="totalmultacondenacao"  name="totalmultacondenacao" class="form-control" style="width:13%">
+    
+    
+    <button type="submit" id="salvarmultacondenacao" name="salvarmultacondenacao" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removermultacondenacao" name="removermultacondenacao" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>
 
 
 </div>
@@ -559,7 +602,7 @@ $pag = 'danos_materiais_morais';
     
     <input type="text" placeholder="Data da causa" id="datadistribuicaocausamulta" name="datadistribuicaocausamulta" class="form-control" style="width:10%">
     
-    <input type="text" placeholder="Histórico" id="historicocausamulta" name="historicocausamulta" class="form-control" style="width:42%">
+    <input type="text" placeholder="Histórico" id="historicocausamulta" name="historicocausamulta" class="form-control" style="width:41%">
     
     <input type="text" placeholder="Valor da Causa" id="valorcausamulta" name="valorcausamulta" class="form-control" style="width:10%">
     
@@ -569,7 +612,10 @@ $pag = 'danos_materiais_morais';
 
     <input type="text" placeholder="Totalcausa" id="totalmultacausa"  name="totalmultacausa" class="form-control" style="width:10%">
 
-    <button id="salvarlinhamultacausa" name="salvarlinhamultacausa" class="btn btn-primary no-print">Salvar</button>
+   
+    <button type="submit" id="salvarmultacausa" name="salvarmultacausa" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removermultacausa" name="removermultacausa" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>
     
 
     </div>
@@ -583,7 +629,7 @@ $pag = 'danos_materiais_morais';
 
     <input type="text" placeholder="Data da determinação" id="datadistribuicaovalormulta" name="datadistribuicaovalormulta" class="form-control" style="width:13%">
     
-    <input type="text" placeholder="Histórico" id="historicovalormulta" name="historicovalormulta" class="form-control" style="width:41.2%">
+    <input type="text" placeholder="Histórico" id="historicovalormulta" name="historicovalormulta" class="form-control" style="width:40.6%">
     
     <input type="text" placeholder="Valor determinado" id="valordeterminadomulta" name="valordeterminadomulta" class="form-control" style="width:15%">   
     
@@ -591,7 +637,10 @@ $pag = 'danos_materiais_morais';
     
     <input type="text" placeholder="Totaldeterminado" id="totalmultadeterminado"  name="totalmultadeterminado" class="form-control" style="width:8%">
 
-    <button id="salvarlinhamultadeterminado" name="salvarlinhamultadeterminado" class="btn btn-primary no-print">Salvar</button>
+    
+    <button type="submit" id="salvarmultadeterminado" name="salvarmultadeterminado" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removermultadeterminado" name="removermultadeterminado" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>
 
 
     </div>
@@ -602,7 +651,7 @@ $pag = 'danos_materiais_morais';
 
     <div class="form-inline" style="margin-top:12px;">
 
-    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:39.3%">
+    <input type="text" placeholder="Histórico" id="historicomultadiaria" name="historicomultadiaria" class="form-control" style="width:38.8%">
 
     <input type="text" placeholder="Valor da multa diária (R$)" id="valormultadiaria" name="valormultadiaria" class="form-control" style="width:9%" >
 
@@ -618,8 +667,10 @@ $pag = 'danos_materiais_morais';
     
     <input type="text" placeholder="Total" id="totalmultadiaria"  name="totalmultadiaria" class="form-control" style="width:8%">
 
-    <button id="salvarlinhamultadiaria" name="salvarlinhamultadiaria" class="btn btn-primary no-print">Salvar</button>
 
+    <button type="submit" id="salvarmultadiaria" name="salvarmultadiaria" class=" btn btn-success" ><i class='fa fa-plus' style='color: white'></i></button>
+
+    <button type="submit" id="removermultadiaria" name="removermultadiaria" class="btn btn-danger" ><i class="fa fa-remove" style='color: white' title="Salvar linha"></i></button>
 
      </div>
 
@@ -636,7 +687,7 @@ $pag = 'danos_materiais_morais';
 <form class="form-inline">
     <div class="form-group">
       <label for="exibirtotaldevido">VALOR TOTAL DEVIDO(R$):</label>
-      <input type="text" style="color: red;font-weight: bold; font-size: 16px;" class="form-control" id="exibirtotaldevido" name="exibirtotaldevido" placeholder="" name="exibirtotaldevido" disabled>
+      <input type="text" style="color: red;font-weight: bold; font-size: 16px;" class="form-control" id="exibirtotaldevido" name="exibirtotaldevido" placeholder="" disabled>
   </div>    
 </form>
 
@@ -650,17 +701,10 @@ $pag = 'danos_materiais_morais';
 <small><div id="mensagem" align="center"></div></small>               
 
 <div class="modal-footer">
-
-    <!--<button type="submit" id="salvar" class="btn btn-primary">Salvar</button>-->
-    <button onclick="window.print()" id="gerarrelatorio" name="gerarrelatorio" class="btn btn-primary no-print">Gerar Relatório</button>
-
-    <!--<a href="../rel/relatorio.php"> Relatório </a>-->
-
-
+ 
+<a href="../rel/calculos.php" target="_blank"><i class="fa fa-file-text-o"></i><span>  Relatório</span></a>                    
+ 
 </div>
-
-
-
 
 <!--**********************Fim do form principal***********************-->
 
@@ -773,7 +817,7 @@ $('#datainicialjuros').change(function() {
 
     if (start<end) {
         var juros   = (end - start)/1000/60/60/24;    
-        $('#juros').val(juros);
+        $('#juros').val(juros.toFixed(0));
         var juros = $('#juros').val()*0.01/30
         var indice = $('#indicecorrecao').val()
         var valor = parseFloat($('#valor').val())
@@ -793,7 +837,7 @@ $('#datafinaljuros').change(function() {
 
     if (start<end) {
         var juros   = (end - start)/1000/60/60/24;                 
-        $('#juros').val(juros);
+        $('#juros').val(juros.toFixed(0));
         var juros = $('#juros').val()*0.01/30
         var indice = $('#indicecorrecao').val()
         var valor = parseFloat($('#valor').val())
@@ -824,19 +868,8 @@ $('#datainiciomultadiaria').change(function() {
     if (start<end) {
         var numerosdias   = (end - start)/1000/60/60/24;    
         $('#numerosdias').val(numerosdias);
-        var numerosdias = $('#numerosdias').val();        
-        var valor = parseFloat($('#valormultadiaria').val());
-        var total = numerosdias*valor;
-        var valorlimite = parseFloat($('#valormultalimite').val());
-        if(total>=valorlimite){
-           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
-       } else{
-
-        $('#totalmultadiaria').val(total.toFixed(2))
-
-       }      
         
-        var soma = $('#totalmultadiaria').val()
+         calculamultadiaria()
 
     }
 })
@@ -852,57 +885,22 @@ $('#datafinalmultadiaria').change(function() {
     if (start<end) {
         var numerosdias   = (end - start)/1000/60/60/24;    
         $('#numerosdias').val(numerosdias);
-        var numerosdias = $('#numerosdias').val();        
-        var valor = parseFloat($('#valormultadiaria').val());
-        var total = numerosdias*valor;
-        var valorlimite = parseFloat($('#valormultalimite').val());
-        if(total>=valorlimite){
-           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
-       } else{
-
-        $('#totalmultadiaria').val(total.toFixed(2))
-
-       }      
-        
-        var soma = $('#totalmultadiaria').val()
+       
+       calculamultadiaria()
 
     }
 })
 
 $('#valormultadiaria').change(function() {
 
-    var numerosdias = $('#numerosdias').val();        
-        var valor = parseFloat($('#valormultadiaria').val());
-        var total = numerosdias*valor;
-        var valorlimite = parseFloat($('#valormultalimite').val());
-        if(total>=valorlimite){
-           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
-       } else{
-
-        $('#totalmultadiaria').val(total.toFixed(2))
-
-       }      
-        
-        var soma = $('#totalmultadiaria').val()
+         calculamultadiaria()
            
 
 })
 
 $('#valormultalimite').change(function() {
 
-    var numerosdias = $('#numerosdias').val();        
-        var valor = parseFloat($('#valormultadiaria').val());
-        var total = numerosdias*valor;
-        var valorlimite = parseFloat($('#valormultalimite').val());
-        if(total>=valorlimite){
-           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
-       } else{
-
-        $('#totalmultadiaria').val(total.toFixed(2))
-
-       }      
-        
-        var soma = $('#totalmultadiaria').val()
+    calculamultadiaria()
     
 
 })
@@ -1037,7 +1035,7 @@ $('#datadistribuicaovalormulta').change(function(){
     
     calculamultadeterminado()     
 
-})
+    })
 
 
 //função que calcula o valor total da parcela com base no valor da parcela sem correção
@@ -1349,11 +1347,14 @@ $('#honorariostotalcondenacao').hide()
 $('#honorariostotalcausa').hide()
 $('#honorariostotaldeterminado').hide()
 $('#atualizarlinhahonorarioscondenacao').hide()
-$('#salvarlinhahonorarioscondenacao').hide()
+$('#salvarhonorarioscondenacao').hide()
+$('#removerhonorarioscondenacao').hide()
 $('#atualizarlinhahonorarioscausa').hide()
-$('#salvarlinhahonorarioscausa').hide()
+$('#salvarhonorarioscausa').hide()
+$('#removerhonorarioscausa').hide()
 $('#atualizarlinhahonorariosvalor').hide()
-$('#salvarlinhahonorariosvalor').hide()
+$('#salvarhonorariosvalor').hide()
+$('#removerhonorariosvalor').hide()
 
 
 
@@ -1374,9 +1375,11 @@ $("#honorarios").click(function(){
        $('#honorariostotalcondenacao').hide()
        $('#honorariostotaldeterminado').hide()
        $('#atualizarlinhahonorarioscondenacao').hide()
-       $('#salvarlinhahonorarioscondenacao').hide()
+       $('#salvarhonorarioscondenacao').hide()
+       $('#removerhonorarioscondenacao').hide()
        $('#atualizarlinhahonorariosvalor').hide()
-       $('#salvarlinhahonorariosvalor').hide()
+       $('#salvarhonorariosvalor').hide()
+       $('#removerhonorariosvalor').hide()
 
        $('#historicocausa').show()
        $('#valorcausa').show()
@@ -1385,7 +1388,8 @@ $("#honorarios").click(function(){
        $('#indicedecorrecaohonorarioscausa').show()
        $('#honorariostotalcausa').show()
        $('#atualizarlinhahonorarioscausa').show()
-       $('#salvarlinhahonorarioscausa').show() 
+       $('#salvarhonorarioscausa').show() 
+       $('#removerhonorarioscausa').show() 
 
 
    } else if(honorarios == "condenacao"){
@@ -1407,13 +1411,16 @@ $("#honorarios").click(function(){
        $('#percentualcondenacao').show()
        $('#honorariostotalcondenacao').show()
        $('#atualizarlinhahonorarioscondenacao').show()
-       $('#salvarlinhahonorarioscondenacao').show()
+       $('#salvarhonorarioscondenacao').show()
+       $('#removerhonorarioscondenacao').show()
 
 
        $('#atualizarlinhahonorarioscausa').hide()
-       $('#salvarlinhahonorarioscausa').hide()
+       $('#salvarhonorarioscausa').hide()
+       $('#removerhonorarioscausa').hide()
        $('#atualizarlinhahonorariosvalor').hide()
-       $('#salvarlinhahonorariosvalor').hide()                       
+       $('#salvarhonorariosvalor').hide()                       
+       $('#removerhonorariosvalor').hide()                       
 
 
    } else if(honorarios == "valor"){
@@ -1430,7 +1437,8 @@ $("#honorarios").click(function(){
        $('#indicedecorrecaohonorariosvalor').show()
        $('#honorariostotaldeterminado').show()
        $('#atualizarlinhahonorariosvalor').show()
-       $('#salvarlinhahonorariosvalor').show()        
+       $('#salvarhonorariosvalor').show()        
+       $('#removerhonorariosvalor').show()        
 
        $('#historicocondenacao').hide()
        $('#percentualcondenacao').hide()
@@ -1438,9 +1446,11 @@ $("#honorarios").click(function(){
        $('#honorariostotalcausa').hide()
 
        $('#atualizarlinhahonorarioscondenacao').hide()
-       $('#salvarlinhahonorarioscondenacao').hide()
+       $('#salvarhonorarioscondenacao').hide()
+       $('#removerhonorarioscondenacao').hide()
        $('#atualizarlinhahonorarioscausa').hide()
-       $('#salvarlinhahonorarioscausa').hide()
+       $('#salvarhonorarioscausa').hide()
+       $('#removerhonorarioscausa').hide()
 
 
 
@@ -1466,11 +1476,14 @@ $("#honorarios").click(function(){
     $('#atualizarlinhahonorarios').hide()
     $('#salvarlinhahonorarios').hide()
     $('#atualizarlinhahonorarioscondenacao').hide()
-    $('#salvarlinhahonorarioscondenacao').hide()
+    $('#salvarhonorarioscondenacao').hide()
+    $('#removerhonorarioscondenacao').hide()
     $('#atualizarlinhahonorarioscausa').hide()
-    $('#salvarlinhahonorarioscausa').hide()
+    $('#salvarhonorarioscausa').hide()
+    $('#removerhonorarioscausa').hide()
     $('#atualizarlinhahonorariosvalor').hide()
-    $('#salvarlinhahonorariosvalor').hide()       
+    $('#salvarhonorariosvalor').hide()       
+    $('#removerhonorariosvalor').hide()       
 
 }    
 })
@@ -1538,14 +1551,15 @@ $('#custasvalor').hide()
 $('#indicecorrecaocustas').hide()
 $('#custasatualizadas').hide()
 $('#atualizarlinhacustas').hide()
-$('#salvarlinhacustas').hide()      
+$('#salvarcustas').hide()      
+$('#removercustas').hide()      
 
 
 $("#custas").click(function(){
 
     var custas = document.getElementById('custas').value      
 
-    if(custas=="custasiniciais" || custas=="custascomplementar" ||custas=="custasapelacao" || custas =="custascumprimento" || custas =="custasoutros"){ 
+    if(custas=="Custas iniciais" || custas=="Custas complementares" ||custas=="Custas apelação" || custas =="Custas cumprimento" || custas =="Outros"){ 
 
         $('#custasdata').show()
         $('#custashistorico').show()
@@ -1553,7 +1567,8 @@ $("#custas").click(function(){
         $('#indicecorrecaocustas').show()
         $('#custasatualizadas').show()
         $('#atualizarlinhacustas').show()
-        $('#salvarlinhacustas').show() 
+        $('#salvarcustas').show() 
+        $('#removercustas').show() 
 
     } 
 
@@ -1565,7 +1580,8 @@ $("#custas").click(function(){
         $('#indicecorrecaocustas').hide()
         $('#custasatualizadas').hide()
         $('#atualizarlinhacustas').hide()
-        $('#salvarlinhacustas').hide()                  
+        $('#salvarcustas').hide()                  
+        $('#removercustas').hide()                  
 
     }   
 })
@@ -1589,7 +1605,8 @@ $('#historicoart523').hide()
 $('#percentualart523').hide()
 $('#totalart523').hide()
 $('#atualizarlinhamulta523').hide()
-$('#salvarlinhamulta523').hide()                              
+$('#salvarmulta523').hide()                              
+$('#removermulta523').hide()                              
 
 
 $("#honorariosmultaart523").click(function(){
@@ -1602,7 +1619,8 @@ $("#honorariosmultaart523").click(function(){
         $('#percentualart523').show()
         $('#totalart523').show()
         $('#atualizarlinhamulta523').show()
-        $('#salvarlinhamulta523').show()
+        $('#salvarmulta523').show()
+        $('#removermulta523').show()
 
 
     }  else {
@@ -1611,7 +1629,8 @@ $("#honorariosmultaart523").click(function(){
         $('#percentualart523').hide()
         $('#totalart523').hide()
         $('#atualizarlinhamulta523').hide()
-        $('#salvarlinhamulta523').hide()
+        $('#salvarmulta523').hide()
+        $('#removermulta523').hide()
         
 
     }   
@@ -1667,10 +1686,14 @@ $('#totalmultacondenacao').hide()
 $('#totalmultacausa').hide()
 $('#totalmultadeterminado').hide()
 $('#totalmultadiaria').hide()
-$('#salvarlinhamultacondenacao').hide()
-$('#salvarlinhamultacausa').hide()
-$('#salvarlinhamultadeterminado').hide()
-$('#salvarlinhamultadiaria').hide()
+$('#salvarmultacondenacao').hide()
+$('#removermultacondenacao').hide()
+$('#salvarmultacausa').hide()
+$('#removermultacausa').hide()
+$('#salvarmultadeterminado').hide()
+$('#removermultadeterminado').hide()
+$('#salvarmultadiaria').hide()
+$('#removermultadiaria').hide()
 
 
 $("#multas").click(function(){
@@ -1688,7 +1711,8 @@ $("#multas").click(function(){
        $('#datadistribuicaocausamulta').show()
        $('#indicedecorrecaocausamulta').show()
        $('#totalmultacausa').show()       
-       $('#salvarlinhamultacausa').show()
+       $('#salvarmultacausa').show()
+       $('#removermultacausa').show()
 
        $('#historicovalormulta').hide()
        $('#valordeterminadomulta').hide()
@@ -1707,9 +1731,12 @@ $("#multas").click(function(){
        $('#numerosdias').hide()
 
 
-       $('#salvarlinhamultacondenacao').hide()
-        $('#salvarlinhamultadeterminado').hide()
-        $('#salvarlinhamultadiaria').hide()
+       $('#salvarmultacondenacao').hide()
+       $('#removermultacondenacao').hide()
+        $('#salvarmultadeterminado').hide()
+        $('#removermultadeterminado').hide()
+        $('#salvarmultadiaria').hide()
+        $('#removermultadiaria').hide()
 
    } else if(multas == "multacondenacao"){
 
@@ -1732,7 +1759,8 @@ $("#multas").click(function(){
        $('#percentualcondenacaomulta').show()
        $('#totalmultacondenacao').show()
        $('#atualizarlinhamulta').show()
-       $('#salvarlinhamultacondenacao').show()
+       $('#salvarmultacondenacao').show()
+       $('#removermultacondenacao').show()
 
        $('#historicomultadiaria').hide()
        $('#valormultadiaria').hide()
@@ -1743,9 +1771,13 @@ $("#multas").click(function(){
        $('#numerosdias').hide()
 
 
-       $('#salvarlinhamultacausa').hide()
-        $('#salvarlinhamultadeterminado').hide()
-        $('#salvarlinhamultadiaria').hide()               
+       $('#salvarmultacausa').hide()
+       $('#removermultacausa').hide()
+        $('#salvarmultadeterminado').hide()
+        $('#removermultadeterminado').hide()
+        $('#salvarmultadiaria').hide()
+        $('#removermultadiaria').hide()
+
 
 
    } else if(multas == "multavalor"){
@@ -1768,7 +1800,8 @@ $("#multas").click(function(){
        $('#indicedecorrecaovalormulta').show()
        $('#totalmultadeterminado').show()
        $('#atualizarlinhamulta').show()
-       $('#salvarlinhamultadeterminado').show()
+       $('#salvarmultadeterminado').show()
+       $('#removermultadeterminado').show()
 
        $('#historicomultadiaria').hide()
        $('#valormultadiaria').hide()
@@ -1779,9 +1812,12 @@ $("#multas").click(function(){
        $('#numerosdias').hide()
 
 
-       $('#salvarlinhamultacausa').hide()
-        $('#salvarlinhamultacondenacao').hide()
-        $('#salvarlinhamultadiaria').hide()    
+       $('#salvarmultacausa').hide()
+       $('#removermultacausa').hide()
+        $('#salvarmultacondenacao').hide()
+        $('#removermultacondenacao').hide()
+        $('#salvarmultadiaria').hide()    
+        $('#removermultadiaria').hide()    
 
 
    } else if (multas == "multadiaria") {
@@ -1814,12 +1850,16 @@ $("#multas").click(function(){
        $('#indicecorrecaomultadiaria').show()
        $('#totalmultadiaria').show()
        $('#atualizarlinhamulta').show()
-       $('#salvarlinhamultadiaria').show()
+       $('#salvarmultadiaria').show()
+       $('#removermultadiaria').show()
        $('#numerosdias').show()
 
-       $('#salvarlinhamultacausa').hide()
-        $('#salvarlinhamultadeterminado').hide()
-        $('#salvarlinhamultacondenacao').hide()
+       $('#salvarmultacausa').hide()
+       $('#removermultacausa').hide()
+        $('#salvarmultadeterminado').hide()
+        $('#removermultadeterminado').hide()
+        $('#salvarmultacondenacao').hide()
+        $('#removermultacondenacao').hide()
 
    }
 
@@ -1852,11 +1892,14 @@ else {
    $('#totalmultadeterminado').hide()
    $('#totalmultadiaria').hide()
    $('#atualizarlinhamulta').hide()
-
-   $('#salvarlinhamultacondenacao').hide()
-$('#salvarlinhamultacausa').hide()
-$('#salvarlinhamultadeterminado').hide()
-$('#salvarlinhamultadiaria').hide()
+   $('#salvarmultacondenacao').hide()
+   $('#removermultacondenacao').hide()
+$('#salvarmultacausa').hide()
+$('#removermultacausa').hide()
+$('#salvarmultadeterminado').hide()
+$('#removermultadeterminado').hide()
+$('#salvarmultadiaria').hide()
+$('#removermultadiaria').hide()
 $('#numerosdias').hide()
 
    
@@ -1896,10 +1939,19 @@ function calculamultadeterminado(){
 
 function calculamultadiaria(){
 
-    var valordeterminado = $('#valordeterminado').val()
-    var indicecorrecaodeterminado = $('#indicedecorrecaohonorariosvalor').val() 
-    var totalhonorarioscondenacao = valordeterminado*indicecorrecaodeterminado
-    $('#honorariostotaldeterminado').val(totalhonorarioscondenacao.toFixed(2))
+        var numerosdias = $('#numerosdias').val();        
+        var valor = parseFloat($('#valormultadiaria').val());
+        var total = numerosdias*valor;
+        var valorlimite = parseFloat($('#valormultalimite').val());
+        if(total>=valorlimite){
+           $('#totalmultadiaria').val(valorlimite.toFixed(2)) 
+       } else{
+
+        $('#totalmultadiaria').val(total.toFixed(2))
+
+       }      
+        
+        var soma = $('#totalmultadiaria').val()
 
 }
 
@@ -1907,19 +1959,78 @@ function calculavalortotaldevido(){
 
     var subtotal = Number.parseFloat(document.getElementById('exibir').value)
     var totalcustas =  Number.parseFloat($('#custasatualizadas').val())
-    var totalhonorarios = Number.parseFloat($('#honorariostotalcondenacao').val())
+    var totalhonorarios = Number.parseFloat($('#honorariostotalcondenacao').val())+Number.parseFloat($('#honorariostotalcausa').val())+Number.parseFloat($('#honorariostotaldeterminado').val())
+
     var totalart523 = Number.parseFloat($('#totalart523').val())
-    var totalmulta = Number.parseFloat($('#totalmultacausa').val())
-    var valortotaldevido = subtotal+totalcustas+totalhonorarios+totalart523+totalmulta
 
-    if(isNaN(valortotaldevido)){
+    var tmultacondenacao = Number.parseFloat($('#totalmultacondenacao').val())
 
-       $('#exibirtotaldevido').val(0.0) 
-   } else{
+    if(isNaN(tmultacondenacao)){
+        tmultacondenacao = 0
+    }
 
-    $('#exibirtotaldevido').val(valortotaldevido.toFixed(2)) 
+    var tmultacausa = Number.parseFloat($('#totalmultacausa').val())
 
-}     
+    if(isNaN(tmultacausa)){
+        tmultacausa = 0
+    }
+
+    var tmultadeterminado = Number.parseFloat($('#totalmultadeterminado').val())
+
+    if(isNaN(tmultadeterminado)){
+        tmultadeterminado = 0
+    }
+
+    var tmultadiaria = Number.parseFloat($('#totalmultadiaria').val())
+
+     if(isNaN(tmultadiaria)){
+        tmultadiaria = 0
+    }
+
+    var totalmulta = tmultacondenacao+tmultacausa+tmultadeterminado+tmultadiaria
+
+    
+    if(isNaN(subtotal)) {
+
+        subtotal = 0     
+        
+
+    } 
+
+    if (isNaN(totalcustas)) {
+
+        totalcustas = 0
+
+        
+    } 
+
+    if (isNaN(totalhonorarios)) {
+
+        totalhonorarios = 0
+
+    }
+
+    if (isNaN(totalart523)) {
+
+        totalart523 = 0
+
+
+    } 
+
+    if (isNaN(totalmulta)) {
+
+
+        totalmulta = 0
+
+    } 
+
+    var vl = subtotal + totalcustas + totalhonorarios + totalart523 + totalmulta
+
+
+
+    $('#exibirtotaldevido').val(vl.toFixed(2))         
+  
+    
 }
 
 })
@@ -1934,6 +2045,6 @@ function calculavalortotaldevido(){
 
 <script src = "js/ajax2.js"></script>
 
-<script src = ""></script>
+<script src = "js/ajax.js"></script>
 
 <script> /* $(document).ready(function(){$("#dataevento").mask("99/99/9999");});*/</script>
