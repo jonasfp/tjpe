@@ -4,7 +4,7 @@ $("#formCiveisProcessos").submit(function () {
 
     event.preventDefault();
     var formData = new FormData(this);
-   
+    
     
     $.ajax({
         url: 'paginas/' + pag + "/salvar_processos.php",
