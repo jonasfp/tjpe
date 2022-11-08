@@ -139,8 +139,8 @@ $query = $pdo->query("DELETE FROM custas");
 
  <table class="table table-hover" >
     <thead>
-        <tr>
-          <th class="text-left fonte-print">CORREÇÃO MONETÁRIA </th>     
+        <tr>          
+         <th class="text-left fonte-print">CORREÇÃO MONETÁRIA </th>     
           <th class="text-left fonte-print" style="width: 17%;">TERMO FINAL</th>
           <th class="text-left fonte-print" style="width: 25%;">JUROS DE MORA </th>
           <th class="text-left fonte-print" style="width: 17%;">TERMO INICIAL</th>   
@@ -289,12 +289,12 @@ $query = $pdo->query("DELETE FROM custas");
     <table class="table table-hover" id="jonas">
         <thead>
             <tr>
-
+            <th class="text-left fonte-print">TIPO</th> 
               <th class="text-left fonte-print" style="width:12%">DATA</th>
-              <th class="text-left fonte-print">HISTÓRICO</th>
+              <th class="text-left fonte-print" style="width:20%">HISTÓRICO</th>
               <th class="text-left fonte-print" style="width:10%">VALOR (R$)</th>
-              <th class="text-left fonte-print" style="width:20%">CORREÇÃO MONETÁRIA</th>
-              <th class="text-left fonte-print" style="width:20%">JUROS DE MORA (Nº DIAS)</th>
+              <th class="text-left fonte-print" style="width:15%">CORREÇÃO MONETÁRIA</th>
+              <th class="text-left fonte-print" style="width:15%">JUROS DE MORA (Nº DIAS)</th>
               <th class="text-left fonte-print" style="width:10%">TOTAL (R$)</th>
               <th class="text-center no-print fonte-print" style="width:12%">AÇÃO</th>
 
@@ -305,7 +305,20 @@ $query = $pdo->query("DELETE FROM custas");
 
       <tbody id="modelo-linha">
 
-        <tr class="linha-lancamento">  
+        <tr class="linha-lancamento">
+
+        <td>
+    
+           <div class="form-group">            
+                <form>
+                    <select id="selectlancamento" name="selectlancamento" class="form-control">
+                        <option value="Credito">C</option>
+                        <option value="Debito">D</option>                                        
+                    </select>
+                </form>
+            </div>  
+
+        </td>  
 
             <td>
 
@@ -713,7 +726,7 @@ $query = $pdo->query("DELETE FROM custas");
 
 <?php 
 
-$query = $pdo->query("SELECT encoge, DATE_FORMAT(data,'%m-%Y') AS nicedata FROM indice_encoge");
+$query = $pdo->query("SELECT encoge, DATE_FORMAT(data,'%d-%m-%Y') AS nicedata FROM indice_encoge");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 
@@ -760,7 +773,7 @@ $("#datafinalcorrecao,#dataevento,#datadistribuicaocausa,#datadistribuicaovalor,
     changeMonth: true,
     changeYear: true,
     firstDay: 1,
-    dateFormat: 'mm-yy',
+    dateFormat: 'dd-mm-yy',
     dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
     dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
     dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -784,7 +797,7 @@ $('#datafinalcorrecao').change(function(){
 
 
     var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
-    var start = $('#dataevento').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    var start = $('#dataevento').datepicker({dateFormat: 'yyyy-mm-dd'}).val()    
     var valor1 = parseFloat(jsonJS[end])
     var valor2 = parseFloat(jsonJS[start])
     var result = (valor2/valor1);
@@ -915,14 +928,14 @@ $('#valormultalimite').change(function() {
 $('#dataevento').change(function(){
 
 
-
     var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    var end2 = $('#datafinalcorrecao').datepicker('getDate');
     var start = $('#dataevento').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    var start2 = $('#dataevento').datepicker('getDate');
     var valor1 = parseFloat(jsonJS[end])
     var valor2 = parseFloat(jsonJS[start])
     var result = (valor2/valor1);
-
-
+    
 
     $('#indicecorrecao').val(result.toFixed(7));
 
@@ -932,6 +945,28 @@ $('#dataevento').change(function(){
     var totallinha = indice*(1+juros)*valor
     $('#total').val(totallinha.toFixed(2))
     var soma = $('#total').val()
+
+    if ((start2<end2) && $('#selectlancamento').val() == 'Credito') {
+
+    var juros = (end2 - start2)/1000/60/60/24;                 
+    $('#juros').val(juros.toFixed(0));
+
+    var valor1 = parseFloat(jsonJS[end])
+    var valor2 = parseFloat(jsonJS[start])
+    var result = (valor2/valor1);
+    
+
+    $('#indicecorrecao').val(result.toFixed(7));
+
+    var juros = $('#juros').val()*0.01/30
+    var indice = $('#indicecorrecao').val()
+    var valor = parseFloat($('#valor').val())
+    var totallinha = -1*indice*(1+juros)*valor
+    $('#total').val(totallinha.toFixed(2))
+    var soma = $('#total').val()
+    } else {
+        
+    }
     
 
 })
@@ -982,9 +1017,6 @@ $('#datadistribuicaovalor').change(function(){
 //função que calcula o valor das custas
 
 $('#custasdata').change(function(){
-
-
-
 
     var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
     var start = $('#custasdata').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
@@ -1068,17 +1100,23 @@ $('#jonas').on('click','#inserirLinha', function () {
 
     count++
 
-    $(this).closest(".linha-lancamento").after('<tr id = "campo'+count+'" class = "linha-lancamento"> <td><input placeholder="Data" type="text" id="dataevento'+count+'" name="dataevento" class="form-control"></td> <td><input type="text" class="form-control" id="historico'+count+'" name="historico" placeholder="Histórico"></td> <td><input type="text" class="form-control" id="valor'+count+'" name="valor" placeholder="Valor"></td> <td><input type="text" class="form-control" id="indicecorrecao'+count+'" name="indicecorrecao" placeholder="Correção Monetária"></td> <td><input type="text" class="form-control" id="juros'+count+'" name="juros" placeholder="Juros Moratórios"></td> <td><input type="text" class="form-control" id="total'+count+'" name="total" placeholder="Total"></td> <td><div class="btn-group btn-group-sm no-print"><button type="button" id="inserirLinha"><i class="fa fa-plus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="button" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="button" id = "'+count+'"class= "removerLinha" ><i class="fa fa-minus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="submit" id="salvarLinha" class = "salvarLinha"><i class="fa fa-save"></i></button></div></td></tr>')
+    $(this).closest(".linha-lancamento").after('<tr id = "campo'+count+'" class = "linha-lancamento"><td><div class="form-group"><form><select id="selectlancamento'+count+'" name="selectlancamento"class="form-control"><option value="Credito">C</option><option value="Debito">D</option></select></form></div></td><td><input placeholder="Data" type="text" id="dataevento'+count+'" name="dataevento" class="form-control"></td> <td><input type="text" class="form-control" id="historico'+count+'" name="historico" placeholder="Histórico"></td> <td><input type="text" class="form-control" id="valor'+count+'" name="valor" placeholder="Valor"></td> <td><input type="text" class="form-control" id="indicecorrecao'+count+'" name="indicecorrecao" placeholder="Correção Monetária"></td> <td><input type="text" class="form-control" id="juros'+count+'" name="juros" placeholder="Juros Moratórios"></td> <td><input type="text" class="form-control" id="total'+count+'" name="total" placeholder="Total"></td> <td><div class="btn-group btn-group-sm no-print"><button type="button" id="inserirLinha"><i class="fa fa-plus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="button" id="atualizarLinha"><i class="fa fa-refresh" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="button" id = "'+count+'"class= "removerLinha" ><i class="fa fa-minus" aria-hidden="true"></i></button></div> <div class="btn-group btn-group-sm no-print"><button type="submit" id="salvarLinha" class = "salvarLinha"><i class="fa fa-save"></i></button></div></td></tr>')
 
 
    /* 
     var jonas = document.getElementById("juros").value
     document.getElementById("juros"+count).value = jonas*/
 
- //replicar juros em todas as linhas   
+ //replicar juros em todas as linhas
 
- var juros = $("#juros").val()
- $('#juros'+count).val(juros);
+ 
+
+    var juros = $("#juros").val()
+    $('#juros'+count).val(juros);
+
+ 
+
+ 
 
 // fim da replicação dos juros
 
@@ -1091,7 +1129,7 @@ $('#jonas').on('click','#inserirLinha', function () {
     changeMonth: true,
     changeYear: true,
     firstDay: 1,
-    dateFormat: 'mm-yy',
+    dateFormat: 'dd-mm-yy',
     dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
     dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
     dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -1169,7 +1207,7 @@ $('#dataevento'+count).change(function(){
 
     while(count>=2){
 
-
+        /*
 
         var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
         var start = $('#dataevento'+count).datepicker({dateFormat: 'yyyy-mm-dd'}).val()
@@ -1184,8 +1222,52 @@ $('#dataevento'+count).change(function(){
         var indice = $('#indicecorrecao'+count).val()
         var valor = parseFloat($('#valor'+count).val())
         var totallinha = indice*(1+juros)*valor
-        $('#total'+count).val(totallinha.toFixed(2))            
+        $('#total'+count).val(totallinha.toFixed(2))
+
+        */
+
+    var end = $('#datafinalcorrecao').datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    var end2 = $('#datafinalcorrecao').datepicker('getDate');
+    var start = $('#dataevento'+count).datepicker({dateFormat: 'yyyy-mm-dd'}).val()
+    var start2 = $('#dataevento'+count).datepicker('getDate');
+    var valor1 = parseFloat(jsonJS[end])
+    var valor2 = parseFloat(jsonJS[start])
+    var result = (valor2/valor1);
+    
+
+    $('#indicecorrecao'+count).val(result.toFixed(7));
+
+    var juros = $('#juros'+count).val()*0.01/30
+    var indice = $('#indicecorrecao'+count).val()
+    var valor = parseFloat($('#valor'+count).val())
+    var totallinha = indice*(1+juros)*valor
+    $('#total'+count).val(totallinha.toFixed(2))
+    
+
+    if ((start2<end2) && $('#selectlancamento'+count).val() == 'Credito') {
+
+    var juros = (end2 - start2)/1000/60/60/24;                 
+    $('#juros'+count).val(juros.toFixed(0));
+
+    var valor1 = parseFloat(jsonJS[end])
+    var valor2 = parseFloat(jsonJS[start])
+    var result = (valor2/valor1);
+    
+
+    $('#indicecorrecao'+count).val(result.toFixed(7));
+
+    var juros = $('#juros'+count).val()*0.01/30
+    var indice = $('#indicecorrecao'+count).val()
+    var valor = parseFloat($('#valor'+count).val())
+    var totallinha = -1*indice*(1+juros)*valor
+    $('#total'+count).val(totallinha.toFixed(2))
+    
+    } else {
+
         
+    }
+
+    
         count--           
 
     }        
@@ -1240,9 +1322,11 @@ $('#datafinalcorrecao').change(function(){
 
 $('#valor'+count).change(function() {
 
-    var count1 = count
+   var count1 = count
 
-    while(count>=2){  
+   while(count>=2){
+
+   if($('#selectlancamento'+count).val() == 'Debito'){
 
         var juros = $('#juros'+count).val()*0.01/30
         var indice = $('#indicecorrecao'+count).val()
@@ -1250,13 +1334,29 @@ $('#valor'+count).change(function() {
         var totallinha = indice*(1+juros)*valor
         $('#total'+count).val(totallinha.toFixed(2))       
 
-        count-- 
+      count-- 
 
-    }
+   } else {
 
-    count = count*count1
 
-    somaparcial()
+        var juros = $('#juros'+count).val()*0.01/30
+        var indice = $('#indicecorrecao'+count).val()
+        var valor = parseFloat($('#valor'+count).val())
+        var totallinha = -1*indice*(1+juros)*valor
+        $('#total'+count).val(totallinha.toFixed(2))       
+
+      count-- 
+
+   } 
+
+
+  }
+
+count = count*count1
+
+somaparcial()
+
+
 
 })
 
