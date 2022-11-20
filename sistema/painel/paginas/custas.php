@@ -12,7 +12,7 @@ require_once('../conexao.php');
 
     <div class="col_3">
 
-        <a href="index.php?pag=home">
+        <a href="index.php?pag=custas_calculos">
             <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-money dollar1 icon-rounded"></i>
